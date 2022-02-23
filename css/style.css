@@ -1,0 +1,19 @@
+@import "@webpixels/css";
+
+/*Import the default variables and function*/
+@import "@webpixels/css/core/functions";
+
+/* Your theme's variables */
+@import "./variables";
+
+.imgprod {
+    width: 650px;
+    height: 400px;
+    object-fit: cover;
+}
+
+.imgcard {
+    width: 450px;
+    height: 300px;
+    object-fit: cover;
+}
