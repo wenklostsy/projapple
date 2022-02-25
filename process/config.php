@@ -11,6 +11,11 @@ $diaAtual = date('d/m/Y H:i', strtotime('-1hour'));
 $ultimoAno = date('Y', strtotime('-1years'));
 #NOME DO USUÁRIO LOGADO
 @$nomeUsuarioLogado = $_SESSION['logado'][0];
+#VARIAVEL DIA ATUAL PARA INPUT DATE
+
+$diaInputAtual = date('d/m/Y');
+#TRANSFORMA A DATA EM UM ARRAY, SEPARANDO-A PELAS BARRAS
+$diaInput = explode("/",$diaInputAtual);
 
 #COMANDO DA TABELA DE USUARIO
 $selecionaUsuarioComando = "SELECT * FROM users";

@@ -46,11 +46,6 @@ include "../process/conexao.php";
             <!--Main-->
             <main class="py-6 bg-surface-secondary">
                 <div class="container-fluid">
-                    <!--CONTEUDO PRINCIPAL-->
-                    <!-- BOTÃO DE CADASTRO DE PRODUTO -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#novo_registro">
-                        Novo Produto
-                    </button>
                     <!--EXIBE MENSAGEM AS MENSAGENS-->
                     <?php
                     if (isset($_SESSION['msg'])) {
@@ -58,6 +53,11 @@ include "../process/conexao.php";
                         unset($_SESSION['msg']);
                     }
                     ?>
+                    <!--CONTEUDO PRINCIPAL-->
+                    <!-- BOTÃO DE CADASTRO DE PRODUTO -->
+                    <button type="button" class="btn btn-primary p-3 m-3" data-bs-toggle="modal" data-bs-target="#novo_registro">
+                        Novo Produto
+                    </button>
                     <div class="card shadow border-0 mb-7">
                         <div class="table-responsive">
                             <table class="table table-hover table-nowrap">
@@ -90,7 +90,7 @@ include "../process/conexao.php";
                                                 <td class="d-none d-md-table-cell"><?php echo $ultimosRegistros['estoque'] ?></td>
                                                 <td>
                                                     <!-- BOTÃO DE EDITAR PRODUTO -->
-                                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modal_editar<?php echo $ultimosRegistros['idprodutos'] ?>">
+                                                    <a type="button" data-bs-toggle="modal" href="../adm/edita_prod.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
                                                         <i class=" fas fa-edit btn-primary p-2 rounded"></i>
                                                     </a>
                                                     <!-- BOTÃO DE APAGAR PRODUTO -->
@@ -122,76 +122,6 @@ include "../process/conexao.php";
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- MODAL DE EDITAR -->
-                                        <div class="modal fade" id="modal_editar<?php echo $ultimosRegistros['idprodutos'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-xl">
-                                                <div class="modal-content">
-                                                    <div class="modal-header text-light apagarModal">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Apagar: <?php echo $ultimosRegistros['nome'] ?></h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="../process/cad_produto.php" method="POST" enctype="multipart/form-data" class="row g-3">
-                                                            <div class="col-md-4">
-                                                                <label for="validationServer01" class="form-label">Nome</label>
-                                                                <input name="nome" type="text" class="form-control">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="validationServer04" class="form-label">Categoria</label>
-                                                                <select name="categoria" class="form-select">
-                                                                    <option selected disabled value="">Selecione uma Categoria</option>
-                                                                    <option value="Celular">Celular</option>
-                                                                    <option value="AppleWatch">AppleWatch</option>
-                                                                    <option value="Fones">Fones</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="validationServer01" class="form-label">Ativo</label>
-                                                                <select name="ativo" class="form-select">
-                                                                    <option selected disabled value="">Selecione uma Categoria</option>
-                                                                    <option value="sim">Sim</option>
-                                                                    <option value="nao">Não</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-12">
-                                                                <label for="validationServer05" class="form-label">Especificações Técnicas (500 caracteres)</label>
-                                                                <textarea name="descricao" class="form-control" id="message-text"></textarea>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="validationServer01" class="form-label">Estoque</label>
-                                                                <input name="estoque" type="text" class="form-control">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="validationCustomUsername" class="form-label">Valor</label>
-                                                                <div class="input-group has-validation">
-                                                                    <span class="input-group-text" id="inputGroupPrepend">R$:</span>
-                                                                    <input type="text" class="form-control" name="valor" aria-describedby="inputGroupPrepend" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="formFile" class="form-label">Imagem Principal</label>
-                                                                <input class="form-control" type="file" name="principal" id="formFile">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="formFile" class="form-label">Imagem 2</label>
-                                                                <input class="form-control" type="file" name="img_dois" id="formFile">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="formFile" class="form-label">Imagem 3</label>
-                                                                <input class="form-control" type="file" name="img_tres" id="formFile">
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <button class="btn btn-primary" name="acao" type="submit">Cadastrar</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                        <a class="btn btn-danger" href="../process/apagar_prod.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">Apagar</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <!-- MODAL DE PROMOÇÃO-->
                                         <div class="modal fade" id="modal_Promo<?php echo $ultimosRegistros['idprodutos'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollablea">
@@ -201,18 +131,18 @@ include "../process/conexao.php";
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="" method="GET" class="d-flex">
+                                                        <form action="../produto/desconto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>" method="POST" class="d-flex">
                                                             <label for="formFile" class="form-label">Inicio da Promoção</label>
-                                                            <input class="form-control" type="date" name="principal" id="formFile">
+                                                            <input class="form-control" type="date" value="<?php echo date("$diaInput[2]-$diaInput[1]-$diaInput[0]") ?>" name="promoini" id="formFile">
                                                             <label for="formFile" class="form-label">Fim da Promoção</label>
-                                                            <input class="form-control" type="date" name="principal" id="formFile">
+                                                            <input class="form-control" type="date" name="promofim" id="formFile">
                                                             <label for="formFile" class="form-label">Total de Desconto</label>
-                                                            <input class="form-control" type="text" name="principal" id="formFile">
+                                                            <input class="form-control" type="text" name="valordesconto" id="formFile">
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                                <button class="btn btn-outline-success" type="submit" name="acaoprincipal" id="button-addon2">Iniciar Promoção</button>
+                                                            </div>
                                                         </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                        <a class="btn btn-danger" href="">Iniciar Promoção</a>
                                                     </div>
                                                 </div>
                                             </div>

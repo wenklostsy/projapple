@@ -62,31 +62,40 @@ include "../process/conexao.php";
                                         <th class="d-none d-md-table-cell" scope="col">Id</th>
                                         <th scope="col">Nome</th>
                                         <th class="d-none d-md-table-cell" scope="col">Valor</th>
+                                        <th class="d-none d-md-table-cell" scope="col">Valor do Desconto</th>
+                                        <th class="d-none d-md-table-cell" scope="col">% De desconto</th>
+                                        <th class="d-none d-md-table-cell" scope="col">Valor final</th>
                                         <th class="d-none d-md-table-cell" scope="col">Estoque</th>
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
                                 <?php
-                                $comandoUltimosRegistros = "SELECT * FROM produtos ORDER BY idprodutos DESC";
+                                $comandoUltimosRegistros = "SELECT * FROM produtos WHERE valor_desconto > 1 ORDER BY idprodutos DESC";
                                 $executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
                                 $numRows = mysqli_num_rows($executaRegistros);
 
                                 if ($numRows == 0) {
                                     echo "<div class='alert alert-primary' role='alert'>
-        Estamos desenvolvendo novos produtos, aguarde! :)
-      </div>";
+                                    Estamos desenvolvendo novos produtos, aguarde! :)
+                                </div>";
                                 } else {
                                     while ($ultimosRegistros = mysqli_fetch_assoc($executaRegistros)) {
+                                        $valorDesconto = ($ultimosRegistros['valor_desconto'] / 100);
+                                        $valorInicial = ($ultimosRegistros['valor'] / 100);
+                                        $porcentagem = $valorDesconto / $valorInicial * 100;
                                 ?>
                                         <tbody>
                                             <tr>
                                                 <th class="d-none d-md-table-cell" scope="row"><?php echo $ultimosRegistros['idprodutos'] ?></th>
                                                 <th scope="row"><?php echo $ultimosRegistros['nome'] ?></th>
                                                 <td class="d-none d-md-table-cell"><?php echo  number_format($ultimosRegistros['valor'] / 100, 2, ',', '.') ?></td>
+                                                <td class="d-none d-md-table-cell"><?php echo  number_format($ultimosRegistros['valor_desconto'] / 100, 2, ',', '.') ?></td>
+                                                <td class="d-none d-md-table-cell"><?php echo ceil($porcentagem). "%" ?></td>
+                                                <td class="d-none d-md-table-cell"><?php echo  number_format(($ultimosRegistros['valor'] - $ultimosRegistros['valor_desconto']) / 100, 2, ',', '.') ?></td>
                                                 <td class="d-none d-md-table-cell"><?php echo $ultimosRegistros['estoque'] ?></td>
                                                 <td>
                                                     <!-- BOTÃO DE EDITAR PRODUTO -->
-                                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modal_editar<?php echo $ultimosRegistros['idprodutos'] ?>"">
+                                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modal_editar<?php echo $ultimosRegistros['idprodutos'] ?>">
                                                         <i class=" fas fa-edit btn-primary p-2 rounded"></i>
                                                     </a>
                                                     <!-- BOTÃO DE APAGAR PRODUTO -->

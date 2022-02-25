@@ -52,3 +52,13 @@ function verificaCarrinhoVazio()
     } // VERIFICAR BUG DO HEADER
 
 }
+
+function verificaId($id)
+{
+    if ($id == 0 or empty($id)) {
+?>
+        <meta http-equiv="refresh" content="0;url=../public/index.php">
+<?php
+        die();
+    }
+}

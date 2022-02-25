@@ -14,8 +14,7 @@ $formatosAceitos = array("png", "jpeg", "jpg");
 $pasta = "../arquivos/fotos_produtos/";
 
 #VERIFICA SE ALGUMA VARIAVEL ESTA VAZIA
-if (
-    empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($descricao) or empty($especificacao) or
+if (empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($descricao) or empty($especificacao) or
     empty($estoque) or empty($principal) or empty($valor)
 ) {
     $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
@@ -36,7 +35,7 @@ if (isset($_POST['acao'])) {
         #DEFINE O NOME TEMPORARIO
         $temporario = $_FILES['principal']['tmp_name'];
         #DEFINE UM NOVO NOME PARA O ARQUIVO COM UM ID UNICO
-        $novoNome = "Ft_produto_" . uniqid() . ".$extensao";
+        $novoNome = "Ft_produto_".uniqid().".$extensao";
     }
 }
 
@@ -47,7 +46,7 @@ if (isset($_FILES['img_dois']['name'])) {
 
     if (in_array($extensaoDois, $formatosAceitos)) {
         $temporarioDois = $_FILES['img_dois']['tmp_name'];
-        $nomeDois = "Ft_produto_dois_" . uniqid() . ".$extensaoDois";
+        $nomeDois = "Ft_produto_dois_".uniqid().".$extensaoDois";
     }
 }
 
@@ -58,7 +57,7 @@ if (isset($_FILES['img_tres']['name'])) {
 
     if (in_array($extensaotres, $formatosAceitos)) {
         $temporariotres = $_FILES['img_tres']['tmp_name'];
-        $novoNometres = "Ft_produto_tres_" . uniqid() . ".$extensaotres";
+        $novoNometres = "Ft_produto_tres_".uniqid().".$extensaotres";
     }
 }
 

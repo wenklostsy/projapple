@@ -63,7 +63,7 @@
                     <?php if (basename($_SERVER['PHP_SELF']) == "cad_produto.php") {
                         echo "active";
                     } ?>"  href="../cadastros/cad_produto.php">
-                        <i class="fas fa-check-square"></i> Cadastro de Produtos
+                        <i class="fas fa-check-square"></i> Produtos
                     </a>
                 </li>
             </ul>
