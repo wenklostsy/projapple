@@ -57,7 +57,7 @@ include "../process/conexao.php";
                     <div class="card shadow border-0 mb-7">
                         <div class="table-responsive">
                             <?php
-                            $comandoUltimosRegistros = "SELECT * FROM produtos WHERE promo_ini >= '$diaInputAtual', promo_fim >= '$diaInputAtual' AND valor_desconto > 1 ORDER BY idprodutos DESC";
+                            $comandoUltimosRegistros = "SELECT * FROM produtos WHERE valor_desconto > 1 ORDER BY idprodutos DESC";
                             $executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
                             $numRows = mysqli_num_rows($executaRegistros);
 
