@@ -27,10 +27,9 @@
     </div>
   </div>
 </div>
-<script src="../template/cep.js"></script>
 <!--MODAL DE CADASTRO-->
 <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalToggleLabel2">Cadastre-se</h5>
@@ -55,26 +54,7 @@
             <label for="exampleInputPassword1" class="form-label">Senha</label>
             <input name="senha" type="password" class="form-control">
           </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Cep</label>
-            <input name="cep" type="text" id="cep" class="form-control" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Rua</label>
-            <input name="rua" type="text" id="rua" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Bairro</label>
-            <input name="bairro" type="text" id="bairro" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Cidade</label>
-            <input name="cidade" type="text" id="cidade" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Estado</label>
-            <input name="uf" type="text" id="uf" class="form-control">
-          </div>
+          <button class="btn btn-primary" type="submit">Cadastrar</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -103,3 +83,5 @@
     </div>
   </div>
 </div>
+
+<script src="../template/cep.js"></script>

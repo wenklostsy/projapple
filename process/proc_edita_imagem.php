@@ -17,8 +17,6 @@ $formatosAceitos = array("png", "jpeg", "jpg");
 $pasta = "../arquivos/fotos_produtos/";
 $nomeBanco = $Principal['principal'];
 
-echo $nomeBanco;
-
 #VERIFICAÇÃO DE UPLOAD DO ARQUIVO PRINCIPAL
 if (isset($_POST['acaoprincipal'])) {
     #RECEBE O NOME DO ARQUIVO
@@ -26,24 +24,41 @@ if (isset($_POST['acaoprincipal'])) {
     #RETIRA A EXTENSÃO DO ARQUIVO COM O PATHINFO NA CHAVE "NAME"
     $extensao = pathinfo($arquivoPrincipal['name'], PATHINFO_EXTENSION);
     #VERIFICA SE NA EXTENSÃO ENVIADA CONTEM ALGUMA DAS EXTENSÕES PERTMITIDAS NO ARRAY
-    if (in_array($extensao, $formatosAceitos)) {
-        #DEFINE O NOME TEMPORARIO
-        $temporario = $_FILES['principal']['tmp_name'];
-        #DEFINE UM NOVO NOME PARA O ARQUIVO COM UM ID UNICO
-        $novoNome = $nomeBanco;
-    }
-    if (move_uploaded_file($temporario, $pasta . $novoNome)) {
-        $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>
-        Imagem principal alterada com sucesso.
-      </div>";
-        header("location: ../adm/edita_prod.php?id=$id");
-        exit();
-    } else {
+    if (!in_array($extensao, $formatosAceitos)) {
         $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>
             Formato do arquivo principal incompativel.
           </div>";
         header("location: ../adm/edita_prod.php?id=$id");
-        die();
+        exit();
+    } else {
+        #DEFINE O NOME TEMPORARIO
+        $temporario = $_FILES['principal']['tmp_name'];
+        #DEFINE UM NOVO NOME PARA O ARQUIVO COM UM ID UNICO
+        $novoNome = $nomeBanco;
+        #APAGA FOTO ANTIGA QUE JA CONTEM NO BANCO
+        $apagarFotoAntigaComando = unlink('../arquivos/fotos_produtos/' . $novoNome);
+        $apagarFotoAntigaPrincipal = mysqli_query($conexao, $apagarFotoAntigaComando);
+
+        #SE A FOTO ANTIGA FOR APAGADA COM SUCESSO MOVE A NOVA FOTO COM O NOME DA ANTIGA
+        if (isset($apagarFotoAntigaPrincipal)) {
+            $novoNomeEditado = "Ft_produto_" . uniqid() . ".$extensao";
+            $comandoApagaBanco = "UPDATE apple.produtos SET principal='$novoNomeEditado' WHERE idprodutos='$id'";
+
+            mysqli_query($conexao, $comandoApagaBanco);
+            if (move_uploaded_file($temporario, $pasta . $novoNomeEditado)) {
+                $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>
+            Imagem principal alterada com sucesso.
+          </div>";
+                header("location: ../adm/edita_prod.php?id=$id");
+                exit();
+            } else {
+                $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>
+            Falha ao realizar alteração na imagem principal.
+            </div>";
+                header("location: ../adm/edita_prod.php?id=$id");
+                exit();
+            };
+        }
     }
 }
 
@@ -58,10 +73,10 @@ if (isset($_POST['segundacao'])) {
         #DEFINE O NOME TEMPORARIO
         $temporario = $_FILES['dois']['tmp_name'];
         #DEFINE UM NOVO NOME PARA O ARQUIVO COM UM ID UNICO
-        $novoNome = "Ft_produto_dois_".uniqid().".$extensao";
+        $novoNome = "Ft_produto_dois_" . uniqid() . ".$extensao";
     }
     $comandoDois = "UPDATE produtos SET img2 = '$novoNome' WHERE idprodutos = $id";
-    mysqli_query($conexao,$comandoDois);
+    mysqli_query($conexao, $comandoDois);
     if (move_uploaded_file($temporario, $pasta . $novoNome)) {
         $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>
         Arquivo dois alterado com sucesso.
@@ -87,10 +102,10 @@ if (isset($_POST['terceiraacao'])) {
         #DEFINE O NOME TEMPORARIO
         $temporario = $_FILES['tres']['tmp_name'];
         #DEFINE UM NOVO NOME PARA O ARQUIVO COM UM ID UNICO
-        $novoNome = "Ft_produto_tres_".uniqid().".$extensao";
+        $novoNome = "Ft_produto_tres_" . uniqid() . ".$extensao";
     }
     $comandotres = "UPDATE produtos SET img3 = '$novoNome' WHERE idprodutos = $id";
-    mysqli_query($conexao,$comandotres);
+    mysqli_query($conexao, $comandotres);
     if (move_uploaded_file($temporario, $pasta . $novoNome)) {
         $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>
         Arquivo três alterado com sucesso.

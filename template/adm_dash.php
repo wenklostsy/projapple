@@ -54,7 +54,7 @@
                     <a class="nav-link 
                     <?php if (basename($_SERVER['PHP_SELF']) == "instagram.php") {
                         echo "active";
-                    } ?>"  href="../cadastros/instagram.php">
+                    } ?>" href="../cadastros/instagram.php">
                         <i class="fa-brands fa-instagram"></i> Instagram
                     </a>
                 </li>
@@ -62,8 +62,20 @@
                     <a class="nav-link 
                     <?php if (basename($_SERVER['PHP_SELF']) == "cad_produto.php") {
                         echo "active";
-                    } ?>"  href="../cadastros/cad_produto.php">
+                    } ?>" href="../cadastros/cad_produto.php">
                         <i class="fas fa-check-square"></i> Produtos
+                        <!--EXIBE A QUANTIDADE DE PRODUTOS COM ESTOQUE A BAIXO DO ESPECIFICADO-->
+                        <?php
+                        include "../process/conexao.php";
+                        $comandoEstoqueMinimo= "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque <=$estoqueMinimo";
+                        $executaEstoqueMinimo = mysqli_query($conexao, $comandoEstoqueMinimo);
+                        $numRows = mysqli_num_rows($executaEstoqueMinimo);
+                        if ($numRows == 0) {
+                            echo "";
+                        }else {
+                            echo "<span class='badge bg-soft-danger text-primary rounded-pill d-inline-flex align-items-center ms-auto'>$numRows</span>";
+                        }
+                        ?>
                     </a>
                 </li>
             </ul>

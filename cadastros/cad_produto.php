@@ -60,28 +60,30 @@ include "../process/conexao.php";
                     </button>
                     <div class="card shadow border-0 mb-7">
                         <div class="table-responsive">
-                            <table class="table table-hover table-nowrap">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th class="d-none d-md-table-cell" scope="col">Id</th>
-                                        <th scope="col">Nome</th>
-                                        <th class="d-none d-md-table-cell" scope="col">Valor</th>
-                                        <th class="d-none d-md-table-cell" scope="col">Estoque</th>
-                                        <th scope="col">Ações</th>
-                                    </tr>
-                                </thead>
-                                <?php
-                                $comandoUltimosRegistros = "SELECT * FROM produtos ORDER BY idprodutos DESC";
-                                $executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
-                                $numRows = mysqli_num_rows($executaRegistros);
+                            <?php
+                            $comandoUltimosRegistros = "SELECT * FROM produtos ORDER BY idprodutos DESC";
+                            $executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
+                            $numRows = mysqli_num_rows($executaRegistros);
 
-                                if ($numRows == 0) {
-                                    echo "<div class='alert alert-primary' role='alert'>
-        Estamos desenvolvendo novos produtos, aguarde! :)
-      </div>";
-                                } else {
+                            if ($numRows == 0) {
+                                echo "<div class='alert alert-primary' role='alert'>
+                                    Nenhum produto cadastrado, insera seu prodo clicando no botão <b>Novo Produto</b>.
+                                </div>";
+                            } else {
+                            ?>
+                                <table class="table table-hover table-nowrap">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="d-none d-md-table-cell" scope="col">Id</th>
+                                            <th scope="col">Nome</th>
+                                            <th class="d-none d-md-table-cell" scope="col">Valor</th>
+                                            <th class="d-none d-md-table-cell" scope="col">Estoque</th>
+                                            <th scope="col">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <?php
                                     while ($ultimosRegistros = mysqli_fetch_assoc($executaRegistros)) {
-                                ?>
+                                    ?>
                                         <tbody>
                                             <tr>
                                                 <th class="d-none d-md-table-cell" scope="row"><?php echo $ultimosRegistros['idprodutos'] ?></th>
@@ -89,6 +91,10 @@ include "../process/conexao.php";
                                                 <td class="d-none d-md-table-cell"><?php echo  number_format($ultimosRegistros['valor'] / 100, 2, ',', '.') ?></td>
                                                 <td class="d-none d-md-table-cell"><?php echo $ultimosRegistros['estoque'] ?></td>
                                                 <td>
+                                                    <!-- BOTÃO DE VISUALIZAR PRODUTO -->
+                                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modal_editar<?php echo $ultimosRegistros['idprodutos'] ?>">
+                                                        <i class="fa-solid fa-eye btn-info p-2 rounded"></i>
+                                                    </a>
                                                     <!-- BOTÃO DE EDITAR PRODUTO -->
                                                     <a type="button" data-bs-toggle="modal" href="../adm/edita_prod.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
                                                         <i class=" fas fa-edit btn-primary p-2 rounded"></i>
@@ -99,7 +105,7 @@ include "../process/conexao.php";
                                                     </a>
                                                     <!--BOTÃO DE PROMOÇÃO DE PRODUTO-->
                                                     <a type="button" data-bs-toggle="modal" data-bs-target="#modal_Promo<?php echo $ultimosRegistros['idprodutos'] ?>">
-                                                        <i class="fas fa-coins btn-info p-2 rounded"></i>
+                                                        <i class="fas fa-coins btn-warning p-2 rounded"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -147,11 +153,87 @@ include "../process/conexao.php";
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- MODAL DE VISUALIZAR -->
+                                        <div class="modal fade" id="modal_editar<?php echo $ultimosRegistros['idprodutos'] ?>" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header text-light apagarModal">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Dados: <?php echo $ultimosRegistros['nome'] ?></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body row g-3">
+                                                        <div class="col-md-6">
+                                                            <label for="validationServer04" class="form-label">Categoria</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                <?php echo $ultimosRegistros['categoria'] ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="validationServer04" class="form-label">Situação, produto esta ativo?</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                <?php echo $ultimosRegistros['ativo'] ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="validationServer04" class="form-label">Quantidade em estoque</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                <?php echo $ultimosRegistros['estoque'] . " Itens em estoque." ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="validationServer04" class="form-label">Preço Original</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                R$: <?php echo number_format($ultimosRegistros['valor'] / 100, 2, ",", ".") ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="validationServer04" class="form-label">Inicio do ultimo desconto</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                <?php echo date("d/m/Y", strtotime($ultimosRegistros['promo_ini'])) ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="validationServer04" class="form-label">Término do ultimo desconto</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                <?php echo date("d/m/Y", strtotime($ultimosRegistros['promo_fim'])) ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="validationServer04" class="form-label">Data de Cadastro</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                <?php echo date("d/m/Y", strtotime($ultimosRegistros['data_cad'])) ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="validationServer04" class="form-label">Dada da ultima modificação</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                <?php echo date("d/m/Y", strtotime($ultimosRegistros['data_edit'])) ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label for="validationServer04" class="form-label">Descrição</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                <?php echo nl2br($ultimosRegistros['descricao']) ?>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <label for="validationServer04" class="form-label">Especificações Técnicas</label>
+                                                            <div class="alert alert-dark" role="alert">
+                                                                <?php echo nl2br($ultimosRegistros['especificacao']) ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                 <?php
                                     }
                                 }
                                 ?>
-                            </table>
+                                </table>
                         </div>
                     </div>
                 </div>

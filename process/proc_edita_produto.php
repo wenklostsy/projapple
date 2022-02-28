@@ -15,8 +15,7 @@ $estoque = trim(filter_input(INPUT_POST, 'estoque', FILTER_SANITIZE_FULL_SPECIAL
 $valor = trim(filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT));
 
 #VERIFICA SE ALGUMA VARIAVEL ESTA VAZIA
-if (empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($descricao) or empty($especificacao) or
-  empty($estoque) or empty($valor) ) {
+if (empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($descricao) or empty($especificacao) or empty($valor) ) {
   $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
       Preencha todos os campos!
     </div>";
@@ -32,7 +31,7 @@ $numRows = mysqli_affected_rows($conexao);
 
 if ($numRows >= 1) {
   $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>
-    Produto cadastrado com sucesso.
+    <b>$nomeProduto</b> editado com sucesso.
   </div>";
   header("location: ../adm/edita_prod.php?id=$id");
 } else {

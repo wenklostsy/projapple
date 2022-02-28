@@ -9,6 +9,7 @@ $inicioDesconto = filter_input(INPUT_POST, 'promoini', FILTER_SANITIZE_FULL_SPEC
 $fimDesconto = filter_input(INPUT_POST, 'promofim', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $diaAtualDesconto = date("Y-m-d");
 $valorDesconto = filter_input(INPUT_POST, 'valordesconto', FILTER_SANITIZE_NUMBER_FLOAT);
+$dataFim = date("d/m/Y", strtotime($fimDesconto));
 
 $id = $_GET['id'];
 
@@ -33,7 +34,7 @@ if ($inicioDesconto < $diaAtualDesconto) {
 
     if ($numRows >= 1) {
         $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>
-    Promoção iniciada com sucesso!
+    Promoção valida até o dia $dataFim!
   </div>";
         header("location: ../cadastros/cad_produto.php");
     } else {

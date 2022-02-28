@@ -15,7 +15,7 @@ $ultimoAno = date('Y', strtotime('-1years'));
 
 $diaInputAtual = date('d/m/Y');
 #TRANSFORMA A DATA EM UM ARRAY, SEPARANDO-A PELAS BARRAS
-$diaInput = explode("/",$diaInputAtual);
+$diaInput = explode("/", $diaInputAtual);
 
 #COMANDO DA TABELA DE USUARIO
 $selecionaUsuarioComando = "SELECT * FROM users";
@@ -41,7 +41,6 @@ $Produto = mysqli_fetch_assoc($Produto);
 #DATA DE CADASTRO DO USUARIO NO SITE
 $data_cadastro_Produto = $Produto['data_cad'];
 $data_cadastro_Produto = date('d/m/Y', strtotime($data_cadastro_Produto));
-mysqli_close($conexao);
 
 #CONFIGURAÇÕES GERAIS
 $nomeSite = "MStudio.Com";
@@ -49,3 +48,24 @@ $nomeVendedor = "Matheus Ribeiro";
 $cidadeVendedor = "São Paulo, Guarulhos";
 $emailVendedor = "matheus.567a@gmail.com";
 $celularVendedor = "(11) 96784-0919";
+
+/*CONFIGURAÇÕES DE VARIAVEIS GLOBAIS DE PREÇO & DESCONTO*/
+
+$comandoUltimosRegistros = "SELECT * FROM produtos ORDER BY idprodutos DESC";
+$executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
+$numRows = mysqli_num_rows($executaRegistros);
+#ASSOCIA OS DADOS
+$ultimosRegistros = mysqli_fetch_assoc($executaRegistros);
+#DEFINE O VALOR DO PRODUTO SEM DESCONTO
+$valorInicial = $ultimosRegistros['valor'];
+#DEFINE O VALOR DO DESCONTO DO PRODUTO
+$valorDesconto = $ultimosRegistros['valor_desconto'];
+#DEFINE O VALOR FINAL DO PRODUTO E FORMATA PARA DUAS CASAS DECIMAIS
+$ValorFinal = number_format(($valorInicial - $valorDesconto) / 100, 2, ",", ".");
+$valorDesconto = number_format($valorDesconto / 100, 2, ",", ".");
+$valorInicial = number_format($valorInicial / 100, 2, ",", ".");
+
+#VARIAVEL QUE DEFINE O ESTOQUE MINIMO
+$estoqueMinimo = 4;
+
+mysqli_close($conexao);

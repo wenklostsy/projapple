@@ -10,6 +10,12 @@ $executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
 $prodAssoc = mysqli_fetch_assoc($executaRegistros);
 $numRows = mysqli_num_rows($executaRegistros);
 
+#VERIFICA SE O ESTOQUE DO PRODUTO ESTA ZERADO
+if ($prodAssoc['estoque'] < 1) {
+    header('Location: ../public/index.php');
+    exit();
+}
+
 ?>
 <title><?php echo $prodAssoc['nome'] ?></title>
 
@@ -50,15 +56,30 @@ $numRows = mysqli_num_rows($executaRegistros);
                     <!--<div class="small mb-1">SKU: BST-498</div>-->
                     <h1 class="display-5 fw-bolder"><?php echo $prodAssoc['nome'] ?></h1>
                     <div class="fs-5 mb-5">
-                        <!--<span class="text-decoration-line-through">De R$: 3,545.00</span>-->
-                        <h4 class="p-3">R$: <?php echo  number_format($prodAssoc['valor'] / 100, 2, ',', '.') ?></h4>
+                        <?php 
+                        $valorDesconto = ($prodAssoc['valor_desconto'] / 100);
+                        $valorInicial = ($prodAssoc['valor'] / 100);
+                        $porcentagem = $valorDesconto / $valorInicial * 100;
+                        $valorInicial1 = number_format(($prodAssoc['valor'] / 100),2,",", ".");
+                        $valorFinal = number_format(($valorInicial - $valorDesconto),2,",", ".");
+                        if (!empty($prodAssoc['valor_desconto'])) {
+                        echo 
+                        "<span class='text-decoration-line-through'><del>De R$: $valorInicial1</del></span>
+                        <h3>Por apenas: R$: $valorFinal </h3>";
+                        } else {
+                        echo "<h4 class='p-3'>R$: $valorInicial1 </h4>";
+                        }
+                        ?>
                     </div>
                     <h5>Especificações Técnicas:</h5>
                     <p class="lead">
                         <?php echo nl2br($prodAssoc['especificacao']) ?>
+                        <hr>
                     </p>
+                    <h5>Estoque: <?php echo $prodAssoc['estoque'] . " Produtos em estoque"; ?></h5>
+                    <hr>
                     <div class="d-flex">
-                        <a href="../cadastros/carrinho.php?id=<?php echo $id?>">
+                        <a href="../cadastros/carrinho.php?id=<?php echo $id ?>">
                             <button class="btn btn-outline-dark p-3 flex-shrink-0" type="button">
                                 <i class="bi-cart-fill me-1"></i>
                                 Adicionar ao carrinho

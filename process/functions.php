@@ -62,3 +62,26 @@ function verificaId($id)
         die();
     }
 }
+
+function verificaDesconto()
+{
+    include "../process/conexao.php";
+    $diaInputAtual = date('d/m/Y');
+    #TRANSFORMA A DATA EM UM ARRAY, SEPARANDO-A PELAS BARRAS
+    $diaAtual = explode("/", $diaInputAtual);
+    $dia = $diaAtual[0];
+    $mes = $diaAtual[1];
+    $ano = $diaAtual[2];
+    $data = "$ano-$mes-$dia";
+    $comandoPromocao = "SELECT idprodutos, promo_fim FROM produtos WHERE valor_desconto >= 1";
+    $executaPromocao = mysqli_query($conexao, $comandoPromocao);
+
+    while ($prodAssoc = mysqli_fetch_assoc($executaPromocao)) {
+        $id =  $prodAssoc['idprodutos'];
+        $comandoFimPromocao = "UPDATE produtos SET promo_ini='', promo_fim='', valor_desconto='' WHERE idprodutos = $id";
+        if ($prodAssoc['promo_fim'] < $data) {
+            mysqli_query($conexao, $comandoFimPromocao);
+        }
+    }
+}
+verificaDesconto();

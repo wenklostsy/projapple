@@ -33,11 +33,11 @@ function pesquisacep(valor) {
         //Valida o formato do CEP.
         if (validacep.test(cep)) {
             //Preenche os campos com "..." enquanto consulta webservice.
-            document.getElementById('rua').value = "...";
-            document.getElementById('bairro').value = "...";
-            document.getElementById('cidade').value = "...";
-            document.getElementById('uf').value = "...";
-            document.getElementById('ibge').value = "...";
+            document.getElementById('rua').value = "Pesquisando...";
+            document.getElementById('bairro').value = "Pesquisando...";
+            document.getElementById('cidade').value = "Pesquisando...";
+            document.getElementById('uf').value = "Pesquisando...";
+            document.getElementById('ibge').value = "Pesquisando...";
 
             //Cria um elemento javascript.
             var script = document.createElement('script');

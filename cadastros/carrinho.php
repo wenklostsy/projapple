@@ -75,7 +75,7 @@ include "../process/conexao.php";
                                         <th>Item</th>
                                         <th class="center">Quantidade</th>
                                         <th class="right">Preço Unitário</th>
-                                        <th class="right">Total</th>
+                                        <th class="right">Total(COM DESCONTO APLICADO SE HOUVER)</th>
                                         <th class="right">Adicionar/Remover</th>
                                     </tr>
                                 </thead>
@@ -117,6 +117,7 @@ include "../process/conexao.php";
                                     }
                                     $qtdTotal = null; // VARIAVEL DE QUANTIDADE TOTAL QUE RECEBE O VALOR NULO
                                     $total = null; //VARIAVEL TOTAL QUE RECEBE O VALOR NULO
+                                    $totalDescontos = null; //VARIAVEL DE DESCONTOS QUE RECEBE NULO
                                     foreach ($_SESSION['carrinho'] as $id => $qtd) {
                                         $comandoUltimosRegistros = "SELECT * FROM produtos WHERE idprodutos = $id";
                                         $executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
@@ -125,14 +126,23 @@ include "../process/conexao.php";
                                         $nomeProduto = $prodAssoc['nome'];
                                         #VARIAVEL DE VALOR UNITARIO FORMATADA
                                         $valorUnitario = number_format($prodAssoc['valor'] / 100, 2, ",", ".");
-                                        #PEGA O VALOR TOTAL DA CONTA
-                                        $total += $prodAssoc['valor'] * $qtd / 100;
-                                        #TOTAL DA CONTA FORMATADO
-                                        $totalConta = number_format($total, 2, ",", ".");
                                         #TOTAL DO PRODUTO INDIVIDUAL
-                                        $totalIndividual = $prodAssoc['valor'] * $qtd / 100;
+                                        if (!empty($prodAssoc['valor_desconto'])) {
+                                            $totalIndividual = (($prodAssoc['valor']-$prodAssoc['valor_desconto']) * $qtd) / 100;
+                                            #PEGA O VALOR TOTAL DA CONTA
+                                            $total += $totalIndividual;
+                                            #TOTAL DA CONTA FORMATADO
+                                            $totalConta = number_format($total, 2, ",", ".");
+                                        } else {
+                                            $totalIndividual = $prodAssoc['valor'] * $qtd / 100;
+                                            #PEGA O VALOR TOTAL DA CONTA
+                                            $total += $prodAssoc['valor'] * $qtd / 100;
+                                            #TOTAL DA CONTA FORMATADO
+                                            $totalConta = number_format($total, 2, ",", ".");
+                                        }
                                         #tTOTAL DO PRODUTO INDIVIDUAL FORMATADO
                                         $totalIndividual = number_format($totalIndividual, 2, ",", ".");
+                                        $totalDescontos += $prodAssoc['valor_desconto'] * $qtd;
                                         $qtdTotal += $qtd;
                                         include "tabelacar.php";
                                     }
@@ -152,6 +162,13 @@ include "../process/conexao.php";
                                                 </td>
                                                 <td class="right"><?php echo $qtdTotal ?></td>
                                             </tr>
+                                                <td class="left">
+                                                    <strong>Descontos:</strong>
+                                                </td>
+                                                <td class="right">
+                                                    <strong>R$: <?php echo number_format($totalDescontos/100, 2, ",", ".") ?></strong>
+                                                </td>
+                                            </tr>
                                             <tr>
                                                 <td class="left">
                                                     <strong>Total</strong>
@@ -160,6 +177,7 @@ include "../process/conexao.php";
                                                     <strong>R$: <?php echo $totalConta ?></strong>
                                                 </td>
                                             </tr>
+                                            <tr>
                                         </tbody>
                                     </table>
                                     <a class="btn btn-success" href="#" data-abc="true">

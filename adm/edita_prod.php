@@ -46,7 +46,7 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                         <!-- Nav -->
                         <ul class="nav nav-tabs overflow-x border-0">
                             <li class="nav-item ">
-                                <a href="#" class="nav-link active">Pedidos em aberto</a>
+                                <a href="#" class="nav-link active">Edição de Produto</a>
                             </li>
                         </ul>
                     </div>
@@ -150,7 +150,10 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                                         <?php
                                         } else {
                                         ?>
-                                            <button class="btn btn-outline-danger mt-auto" type="button" id="button-addon2">Apagar</button>
+                                            <a href="">
+                                                <button class="btn btn-outline-danger mt-auto" type="button" id="button-addon2">Apagar</button>
+
+                                            </a>
                                         <?php
                                         }
                                         ?>
