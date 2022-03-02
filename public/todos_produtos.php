@@ -1,4 +1,9 @@
-<?php include "../template/geral.php" ?>
+<?php include "../template/geral.php";
+#CRIA O COMANDO DE PAGINAÇÃO PARA A FUNÇÃO SER REALIZADA COM A TABELA ESPECIFICA
+$comandoPaginacao = "SELECT * FROM produtos";
+#SELECIONA A QUANTIDADE DE REGISTROS A SEREM EXIBIDOS
+$totalDePaginas = 12;
+?>
 <title>Produtos</title>
 
 <body>
@@ -35,25 +40,23 @@
                     <?php
                     if (isset($_GET['procura'])) {
                         $varPesquisa = $_GET['procura'];
-                        $comando = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1  AND nome LIKE '%$varPesquisa%'  ORDER BY idprodutos DESC";
+                        $comandoPaginacao = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1  AND nome LIKE '%$varPesquisa%' ORDER BY idprodutos DESC";
                     } elseif (isset($_GET['categoria'])) {
-                        $varCategoria = $_GET['categoria'];
-                        $comando = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1 AND categoria LIKE '%$varCategoria%' ORDER BY idprodutos DESC";
+                        $varPesquisa = $_GET['categoria'];
+                        $comandoPaginacao = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1 AND categoria LIKE '%$varPesquisa%' ORDER BY idprodutos DESC";
                     } else {
-                        $comando = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1 ORDER BY idprodutos DESC";
+                        $comandoPaginacao = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1 ORDER BY idprodutos DESC";
                     }
 
-                    include "../process/conexao.php";
-                    $comandoUltimosRegistros = $comando;
-                    $executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
-                    $numRows = mysqli_num_rows($executaRegistros);
+                    #INCLUI A PAGINAÇÃO
+                    include "../template/paginacao.php";
 
                     if ($numRows == 0) {
                         echo "<div class='alert alert-warning' role='alert'>
                         Ainda não há nenhum produto cadastrado.
                       </div>";
                     } else {
-                        while ($ultimosRegistros = mysqli_fetch_assoc($executaRegistros)) {
+                        while ($ultimosRegistros = mysqli_fetch_assoc($limite)) {
                             $valorInicial = $ultimosRegistros['valor'];
                             $valorDesconto = $ultimosRegistros['valor_desconto'];
                             $ValorFinal = number_format(($valorInicial - $valorDesconto) / 100, 2, ",", ".");
@@ -92,6 +95,43 @@
                     }
                     mysqli_close($conexao);
                     ?>
+                </div>
+
+                <div class="card-footer border-0 py-5">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <?php
+                            if (isset($_GET['procura'])) {
+                                $voltar = "<li class='page-item'>
+                                        <a class='page-link' href='?procura=$varPesquisa&pagina=$anterior'>Anterior</a>
+                                    </li>";
+                                $proximo = "<li class='page-item'>
+                                       <a class='page-link' href='?procura=$varPesquisa&pagina=$proximo'>Proximo</a>
+                                   </li>";
+                            } elseif (isset($_GET['categoria'])) {
+                                $voltar = "<li class='page-item'>
+                                        <a class='page-link' href='?categoria=$varPesquisa&pagina=$anterior'>Anterior</a>
+                                    </li>";
+                                $proximo = "<li class='page-item'>
+                                       <a class='page-link' href='?categoria=$varPesquisa&pagina=$proximo'>Proximo</a>
+                                   </li>";
+                            } else {
+                                $voltar = "<li class='page-item'>
+                                        <a class='page-link' href='?pagina=$anterior'>Anterior</a>
+                                    </li>";
+                                $proximo = "<li class='page-item'>
+                                       <a class='page-link' href='?pagina=$proximo'>Proximo</a>
+                                   </li>";
+                            }
+                            if ($pc > 1) {
+                                echo $voltar;
+                            }
+                            if ($pc < $tp) {
+                                echo $proximo;
+                            }
+                            ?>
+                        </ul>
+                    </nav>
                 </div>
         </div>
     </div>

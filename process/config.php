@@ -68,4 +68,6 @@ $valorInicial = number_format($valorInicial / 100, 2, ",", ".");
 #VARIAVEL QUE DEFINE O ESTOQUE MINIMO
 $estoqueMinimo = 4;
 
+/*SCRIPT DE PAGINAÇÃO*/
+
 mysqli_close($conexao);

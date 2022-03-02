@@ -5,6 +5,12 @@ include "../template/geral.php";
 verificaAcesso();
 #INCLUI OS ARQUIVOS MODAIS
 include "../template/modal.php";
+#CRIA O COMANDO DE PAGINAÇÃO PARA A FUNÇÃO SER REALIZADA COM A TABELA ESPECIFICA
+$comandoPaginacao = "SELECT * FROM users";
+#SELECIONA A QUANTIDADE DE REGISTROS A SEREM EXIBIDOS
+$totalDePaginas = 5;
+#INCLUI A PAGINAÇÃO
+include "../template/paginacao.php";
 ?>
 <title>Dashboard</title>
 
@@ -84,7 +90,7 @@ include "../template/modal.php";
                                                 Total de Produtos
                                             </span>
                                             <span class="h3 font-bold mb-0">
-                                               <?php echo $numlinhasProdutos ?>
+                                                <?php echo $numlinhasProdutos ?>
                                             </span>
                                         </div>
                                         <div class="col-auto">
@@ -172,7 +178,7 @@ include "../template/modal.php";
                                         Não existem usuários cadastrados.
                                       </div>";
                                 } else {
-                                    while ($users = mysqli_fetch_assoc($usuariosGeral)) {
+                                    while ($users = mysqli_fetch_assoc($limite)) {
                                         $data_cadastro_user = $users['data_cad'];
                                         $data_cadastro_user = date('d/m/Y', strtotime($data_cadastro_user));
                                 ?>
@@ -237,14 +243,16 @@ include "../template/modal.php";
                                                 </div>
                                             </div>
                                         </div>
-                                <?php
+                                    <?php
                                     }
-                                }
-                                ?>
+                                    ?>
                             </table>
                         </div>
                         <div class="card-footer border-0 py-5">
-                            <span class="text-muted text-sm">Exibindo 10 items out of 250 results found</span>
+                        <?php
+                                    paginacao($anterior, $proximo, $pc, $tp);
+                                }
+                        ?>
                         </div>
                     </div>
                 </div>

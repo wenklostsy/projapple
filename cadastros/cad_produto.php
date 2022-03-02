@@ -7,6 +7,12 @@ verificaAcesso();
 include "../template/modal.php";
 #INCLUI O ARQUIVO DE CONEXAO
 include "../process/conexao.php";
+#CRIA O COMANDO DE PAGINAÇÃO PARA A FUNÇÃO SER REALIZADA COM A TABELA ESPECIFICA
+$comandoPaginacao = "SELECT * FROM produtos ORDER BY idprodutos DESC";
+#SELECIONA A QUANTIDADE DE REGISTROS A SEREM EXIBIDOS
+$totalDePaginas = 10;
+#INCLUI A PAGINAÇÃO
+include "../template/paginacao.php";
 ?>
 <title>Dashboard</title>
 
@@ -82,7 +88,7 @@ include "../process/conexao.php";
                                         </tr>
                                     </thead>
                                     <?php
-                                    while ($ultimosRegistros = mysqli_fetch_assoc($executaRegistros)) {
+                                    while ($ultimosRegistros = mysqli_fetch_assoc($limite)) {
                                     ?>
                                         <tbody>
                                             <tr>
@@ -234,6 +240,11 @@ include "../process/conexao.php";
                                 }
                                 ?>
                                 </table>
+                                <div class="card-footer border-0 py-5">
+                                    <?php
+                                    paginacao($anterior, $proximo, $pc, $tp);
+                                    ?>
+                                </div>
                         </div>
                     </div>
                 </div>
