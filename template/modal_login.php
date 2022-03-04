@@ -92,4 +92,3 @@ if (!isset($_SESSION['logado'])) {
 <?php
 }
 ?>
-<script src="../template/cep.js"></script>

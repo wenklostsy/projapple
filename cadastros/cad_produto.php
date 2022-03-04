@@ -3,8 +3,6 @@
 include "../template/geral.php";
 #VERIFICA SE O USUÁRIO POSSUI ACESSO
 verificaAcesso();
-#INCLUI OS ARQUIVOS MODAIS
-include "../template/modal.php";
 #INCLUI O ARQUIVO DE CONEXAO
 include "../process/conexao.php";
 #CRIA O COMANDO DE PAGINAÇÃO PARA A FUNÇÃO SER REALIZADA COM A TABELA ESPECIFICA

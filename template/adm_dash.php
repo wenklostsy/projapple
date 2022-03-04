@@ -78,6 +78,22 @@
                         ?>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link 
+                    <?php if (basename($_SERVER['PHP_SELF']) == "entrada-material.php") {
+                        echo "active";
+                    } ?>" href="../estoque/entrada-material.php">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Entradas & Saidas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link 
+                    <?php if (basename($_SERVER['PHP_SELF']) == "fornecedores.php") {
+                        echo "active";
+                    } ?>" href="../estoque/fornecedores.php">
+                        <i class="fa-solid fa-address-card"></i> Fornecedores
+                    </a>
+                </li>
             </ul>
             <!-- Divider -->
             <hr class="navbar-divider my-1 opacity-20">
