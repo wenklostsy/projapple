@@ -3,16 +3,43 @@ session_start();
 include "../process/conexao.php";
 
 #VARIAVEIS DE CADASTRO
-$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$senha = password_hash($senha, PASSWORD_DEFAULT);
-$telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$nome = trim(filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+$email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+$senha = trim(filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+$senha = trim(password_hash($senha, PASSWORD_DEFAULT));
+$telefone = trim(filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+#VARIAVEIS DE LOCALIDADE
+$cep = trim(filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+$cidade = trim(filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+$estado = trim(filter_input(INPUT_POST, 'uf', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+$rua = trim(filter_input(INPUT_POST, 'rua', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+$bairro = trim(filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+$numero = trim(filter_input(INPUT_POST, 'numero', FILTER_VALIDATE_INT));
+
+echo $nome . "<br>";
+echo $email . "<br>";
+echo $senha . "<br>";
+echo $telefone . "<br>";
+echo $cep . "<br>";
+echo $cidade . "<br>";
+echo $estado . "<br>";
+echo $rua . "<br>";
+echo $bairro . "<br>";
+echo $numero . "<br>";
 
 #VERIFICAÇÃO DE ALGUMA VARIAVEL VAZIA
 if (empty($nome) or empty($email) or empty($senha) or empty($telefone)) {
   $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
     Preencha todos os campos!
+  </div>";
+  header('location: ../public/index.php');
+  exit();
+}
+
+#VERIFICA SE OS DADOS DE LOCALIDADE ESTÃO VAZIOS
+if (empty($cep) or empty($cidade) or empty($estado) or empty($rua) or empty($bairro) or empty($numero)) {
+  $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
+  Cep, Cidade, Estado, Rua, Bairro e Numero não podem estar vazios.
   </div>";
   header('location: ../public/index.php');
   exit();
@@ -31,7 +58,16 @@ $executaUsuarioACESS = mysqli_query($conexao, $verificaUsuarioACESS);
 $associadadosUsuarioACESS = mysqli_fetch_assoc($executaUsuarioACESS);
 
 #VERIFICA SE JÁ EXISTE UM USUÁRIO CADASTRADO
-if ($associadadosUsuarioCAD['total'] OR $associadadosUsuarioACESS == 1) {
+if ($associadadosUsuarioCAD['total'] == 1) {
+  $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
+    Usuário já cadastrado, por favor tente novamente.
+  </div>";
+  header('location: ../public/index.php');
+  exit();
+}
+
+#VERIFICA SE JÁ EXISTE UM USUÁRIO CADASTRADO
+if ($associadadosUsuarioACESS['total'] == 1) {
   $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
     Usuário já cadastrado, por favor tente novamente.
   </div>";
@@ -40,33 +76,29 @@ if ($associadadosUsuarioCAD['total'] OR $associadadosUsuarioACESS == 1) {
 }
 
 #COMANDO PARA CADASTRO DE USUÁRIO
-$comandoCad = "INSERT INTO users (nome, telefone, email, senha, data_cad ) VALUES 
-('$nome', '$telefone', '$email', '$senha', NOW());";
+$comandoCad = "INSERT INTO users (nome, telefone, cep, cidade, estado, rua, bairro, numero, email, senha, data_cad ) VALUES 
+('$nome', '$telefone', '$cep', '$cidade', '$estado', '$rua', '$bairro', '$numero','$email', '$senha', NOW());";
 
 #COMANDO PARA CADASTRO DE ACESSO PADRÃO
-$comandoAcesso = "INSERT INTO acesso (identificacao , lastmodificacao) VALUES 
-('$email', NOW());";
+$comandoAcesso = "INSERT INTO acesso (identificacao, lastmodificacao) VALUES ('$email', NOW())";
 
-#CRIA OS ACESSOS
-$executaAcesso = mysqli_query($conexao, $comandoAcesso);
-#VERIFICA SE FOI AFETADA ALGUMA LINHA
-$affectedRows = mysqli_affected_rows($conexao);
+#CADASTRA O USUARIO
+$executaCad = mysqli_query($conexao, $comandoCad);
 
-if ($affectedRows == 1) {
-  #CADASTRA O USUARIO
-  $executaCad = mysqli_query($conexao, $comandoCad);
-  #EXIBE A MENSAGEM QUE JÁ EXISTE USUÁRIO CADASTRADO NO BANCO
-  if (mysqli_insert_id($conexao)) {
-    $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>
+if (mysqli_insert_id($conexao)) {
+  #CRIA OS ACESSOS
+  $executaAcesso = mysqli_query($conexao, $comandoAcesso);
+  $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>
     Usuário cadastrado com sucesso! Faça login para continuar.
   </div>";
-    header('location: ../public/index.php');
-    exit();
-  }
+  echo "Cadastrado com sucesso";
+  header('location: ../public/index.php');
+  exit();
 } else {
   $_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>
   Falha ao cadastrar usuário.
 </div>";
+  echo "Falha";
   header('location: ../public/index.php');
   exit();
 }

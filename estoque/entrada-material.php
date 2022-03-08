@@ -38,7 +38,7 @@ include "../template/modal.php";
                                 <a href="#" class="nav-link font-regular">Saidas</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link font-regular">Movimentações</a>
+                                <a href="movimentacao.php" class="nav-link font-regular">Movimentações</a>
                             </li>
                         </ul>
                     </div>
@@ -47,16 +47,23 @@ include "../template/modal.php";
             <!-- CONTEUDO PRINCIPAL -->
             <main class="py-6 bg-surface-secondary">
                 <div class="container-fluid">
+                    <!--EXIBE MENSAGEM AS MENSAGENS-->
+                    <?php
+                    if (isset($_SESSION['msg'])) {
+                        echo $_SESSION['msg'];
+                        unset($_SESSION['msg']);
+                    }
+                    ?>
                     <div class="card shadow border-0 p-4 mb-7">
-                        <form class="row g-3 needs-validation" novalidate>
+                        <form action="processa-entrada.php" method="POST" class="row g-3 needs-validation">
                             <div class="col-md-4">
                                 <label for="validationCustom04" class="form-label">Produto</label>
-                                <select class="form-select" id="validationCustom04" required>
-                                    <option selected disabled value="">Escolha...</option>
+                                <select name="id" class="form-select" id="validationCustom04" required>
+                                    <option selected disabled value="">Escolha um produto...</option>
                                     <?php
                                     while ($produtosNome = mysqli_fetch_assoc($ProdutoGeral)) {
                                     ?>
-                                    <option value="<?php echo $produtosNome['nome'] ?>"><?php echo $produtosNome['nome'] ?></option>
+                                        <option value="<?php echo $produtosNome['idprodutos'] ?>"><?php echo $produtosNome['nome'] ?></option>
                                     <?php
                                     }
                                     ?>
@@ -64,26 +71,34 @@ include "../template/modal.php";
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom02" class="form-label">Quantidade</label>
-                                <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+                                <input name="qtd" type="text" class="form-control" id="validationCustom02" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Nota Fiscal</label>
-                                <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+                                <input name="notafiscal" type="text" class="form-control" id="validationCustom01" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom04" class="form-label">Fornecedor</label>
-                                <select class="form-select" id="validationCustom04" required>
-                                    <option selected disabled value="">Escolha...</option>
-                                    <option>...</option>
+                                <select name="fornecedor" class="form-select" id="validationCustom04" required>
+                                    <option selected disabled value="">Escolha um fornecedor...</option>
+                                    <?php
+                                    $comandoFornecedor = "SELECT nome FROM fornecedores";
+                                    $executaFornecedor = mysqli_query($conexao, $comandoFornecedor);
+                                    while ($fornecedorNome = mysqli_fetch_assoc($executaFornecedor)) {
+                                    ?>
+                                        <option value="<?php echo $fornecedorNome['nome'] ?>"><?php echo $fornecedorNome['nome'] ?></option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Valor Gasto</label>
-                                <input type="text" class="form-control" id="validationCustom01" required>
+                                <input name="valor" type="text" class="form-control" id="validationCustom01" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Data de Entrada</label>
-                                <input type="date" class="form-control" id="validationCustom01" required>
+                                <input name="dataentrada" type="date" class="form-control" id="validationCustom01" required>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">Nova Entrada</button>

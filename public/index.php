@@ -1,13 +1,15 @@
 <?php
 include "../template/geral.php";
 include "../process/conexao.php";
+#INCLUI A API DE CEP
+include_once "../template/cep.php";
 ?>
 <title>Produtos</title>
 
 <body>
     <?php
     include_once "../template/navbar.php";
-    $comandoProdutoAleatorio = "SELECT * FROM produtos ORDER BY RAND() LIMIT 1";
+    $comandoProdutoAleatorio = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1 ORDER BY RAND() LIMIT 1";
     $executaAleatorio = mysqli_query($conexao, $comandoProdutoAleatorio);
     $prodAleatorio = mysqli_fetch_assoc($executaAleatorio);
     $numLinhasAleatorio = mysqli_num_rows($executaAleatorio);
@@ -30,7 +32,7 @@ include "../process/conexao.php";
     <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <!--INICIO DOS CARDS EM DESTAQUE-->
                 <?php
                 $comandoUltimosRegistros = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1 ORDER BY idprodutos DESC LIMIT 4";
@@ -61,7 +63,7 @@ include "../process/conexao.php";
                                 ?>
                                 <!-- IMAGEM DO PRODUTO-->
                                 <a href="../public/produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
-                                    <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 350px; height: 200px" alt="Imagem do Produto" />
+                                    <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 225px" alt="Imagem do Produto" />
                                 </a>
                                 <!-- DETALHES DO PRODUTO-->
                                 <div class="card-body p-4">

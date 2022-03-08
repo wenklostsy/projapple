@@ -1,46 +1,28 @@
-<!-- MODAL DE FATURAMENTO-->
-<div class="modal" id="Modal_Faturamento" tabindex="-1" aria-labelledby="Modal_Sair" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+<!-- MODAL DE FATURAMENTO -->
+<div class="modal fade" id="Modal_Faturamento" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalToggleLabel2">Faturamento</h5>
+      <div class="modal-header text-light apagarModal">
+        <h5 class="modal-title" id="exampleModalLabel">Faturamento</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="text-right">
-          <i class="fa fa-close close" data-dismiss="modal"></i>
+      <div class="modal-body row g-3">
+        <div class="col-md-6">
+          <label for="validationServer04" class="form-label">Faturamento de hoje</label>
+          <div class="alert alert-dark" role="alert">
+
+          </div>
         </div>
-        <div class="px-4 py-5">
-          <!--DIA ATUAL-->
-          <h5 class="text-uppercase">Faturamento de hoje dia
-            <?php
-            echo $diaAtual;
-            ?>
-          </h5>
-          <div class="d-flex justify-content-between mt-3">
-            <span class="font-weight-bold">Total</span>
-            <span class="font-weight-bold theme-color">$2125.00</span>
+        <div class="col-md-6">
+          <label for="validationServer04" class="form-label">Faturamento do ultimo mês <?php echo $ultimoMes ?></label>
+          <div class="alert alert-dark" role="alert">
+
           </div>
-          <div class="mb-3">
-            <hr class="new1">
-          </div>
-          <!--ULTIMO MÊS ATUAL-->
-          <h5 class="text-uppercase">Faturamento do ultimo mês <?php echo $ultimoMes ?></h5>
-          <div class="d-flex justify-content-between mt-3">
-            <span class="font-weight-bold">Total</span>
-            <span class="font-weight-bold theme-color">$2125.00</span>
-          </div>
-          <div class="mb-3">
-            <hr class="new1">
-          </div>
-          <!--ULTIMO ANO-->
-          <h5 class="text-uppercase">Faturamento do ultimo ano <?php echo $ultimoAno ?></h5>
-          <div class="d-flex justify-content-between mt-3">
-            <span class="font-weight-bold">Total</span>
-            <span class="font-weight-bold theme-color">$2125.00</span>
-          </div>
-          <div class="mb-3">
-            <hr class="new1">
+        </div>
+        <div class="col-md-6">
+          <label for="validationServer04" class="form-label">Faturamento do ultimo ano <?php echo $ultimoAno ?></label>
+          <div class="alert alert-dark" role="alert">
+
           </div>
         </div>
       </div>
@@ -51,46 +33,31 @@
     </div>
   </div>
 </div>
-<!-- MODAL DE DESPESAS-->
-<div class="modal fade" id="Modal_Despesas" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+<!-- MODAL DE DESPESAS -->
+<div class="modal fade" id="Modal_Despesas" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalToggleLabel2">Despesas</h5>
+      <div class="modal-header text-light apagarModal">
+        <h5 class="modal-title" id="exampleModalLabel">Despesas</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="px-4 py-5">
-          <!--DIA ATUAL-->
-          <h5 class="text-uppercase">Despesas do dia de hoje
-            <?php
-            echo $diaAtual;
-            ?>
-          </h5>
-          <div class="d-flex justify-content-between mt-3">
-            <span class="font-weight-bold">Total</span>
-            <span class="font-weight-bold theme-color">$2125.00</span>
+      <div class="modal-body row g-3">
+        <div class="col-md-6">
+          <label for="validationServer04" class="form-label">Despesas desse mês</label>
+          <div class="alert alert-dark" role="alert">
+            R$: <?php echo number_format($verificaGasto['total'] / 100, 2, ",", ".") ?>
           </div>
-          <div class="mb-3">
-            <hr class="new1">
+        </div>
+        <div class="col-md-6">
+          <label for="validationServer04" class="form-label">Despesas do ultimo mês <?php echo $ultimoMes ?></label>
+          <div class="alert alert-dark" role="alert">
+            R$: <?php echo number_format($verificaGastoMesAnterior['total'] / 100, 2, ",", ".") ?>
           </div>
-          <!--ULTIMO MÊS ATUAL-->
-          <h5 class="text-uppercase">Despesas do ultimo mês <?php echo $ultimoMes ?></h5>
-          <div class="d-flex justify-content-between mt-3">
-            <span class="font-weight-bold">Total</span>
-            <span class="font-weight-bold theme-color">$2125.00</span>
-          </div>
-          <div class="mb-3">
-            <hr class="new1">
-          </div>
-          <!--ULTIMO ANO-->
-          <h5 class="text-uppercase">Despesas do ultimo ano <?php echo $ultimoAno ?></h5>
-          <div class="d-flex justify-content-between mt-3">
-            <span class="font-weight-bold">Total</span>
-            <span class="font-weight-bold theme-color">$2125.00</span>
-          </div>
-          <div class="mb-3">
-            <hr class="new1">
+        </div>
+        <div class="col-md-6">
+          <label for="validationServer04" class="form-label">Despesas do ultimo ano <?php echo $ultimoAno ?></label>
+          <div class="alert alert-dark" role="alert">
+
           </div>
         </div>
       </div>
@@ -101,16 +68,33 @@
     </div>
   </div>
 </div>
-<!-- MODAL DOS LUCROS-->
-<div class="modal fade" id="Modal_Lucro" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
+<!-- MODAL DE LUCRO -->
+<div class="modal fade" id="Modal_Lucro" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalToggleLabel2">Lucro</h5>
+      <div class="modal-header text-light apagarModal">
+        <h5 class="modal-title" id="exampleModalLabel">Lucro</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        LUCRO
+      <div class="modal-body row g-3">
+        <div class="col-md-6">
+          <label for="validationServer04" class="form-label">Lucro</label>
+          <div class="alert alert-dark" role="alert">
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="validationServer04" class="form-label">Faturamento do ultimo mês <?php echo $ultimoMes ?></label>
+          <div class="alert alert-dark" role="alert">
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="validationServer04" class="form-label">Faturamento do ultimo ano <?php echo $ultimoAno ?></label>
+          <div class="alert alert-dark" role="alert">
+
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" data-bs-target="#Modal_Faturamento" data-bs-toggle="modal">Faturamento</button>

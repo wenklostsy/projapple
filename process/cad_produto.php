@@ -7,15 +7,13 @@ $categoria = filter_input(INPUT_POST, 'categoria', FILTER_SANITIZE_FULL_SPECIAL_
 $ativo = filter_input(INPUT_POST, 'ativo', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $especificacao = filter_input(INPUT_POST, 'especificacao', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$estoque = filter_input(INPUT_POST, 'estoque', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $valor = filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT);
 $principal = $_FILES['principal']['name'];
 $formatosAceitos = array("png", "jpeg", "jpg");
 $pasta = "../arquivos/fotos_produtos/";
 
 #VERIFICA SE ALGUMA VARIAVEL ESTA VAZIA
-if (empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($descricao) or empty($especificacao) or
-    empty($estoque) or empty($principal) or empty($valor)) {
+if (empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($descricao) or empty($especificacao) or empty($principal) or empty($valor)) {
     $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
       Preencha todos os campos!
     </div>";
@@ -62,13 +60,13 @@ if (isset($_FILES['img_tres']['name'])) {
 
 $comandoProduto = "INSERT INTO produtos
 (nome, categoria, ativo, descricao, especificacao, estoque, valor, principal, img2, img3, data_cad) VALUES 
-('$nomeProduto', '$categoria', '$ativo', '$descricao', '$especificacao', '$estoque', '$valor', '$novoNome', '$nomeDois',
+('$nomeProduto', '$categoria', '$ativo', '$descricao', '$especificacao', 0, '$valor', '$novoNome', '$nomeDois',
  '$novoNometres', NOW())";
 
 $executaProduto = mysqli_query($conexao, $comandoProduto);
 
 if (mysqli_insert_id($conexao)) {
-    $_SESSION['msg'] = "<div class='alert alert-success' role='alert'>
+    $_SESSION['msg'] = "<div class='alert alert-success' p-3 role='alert'>
     Produto cadastrado com sucesso.
   </div>";
     #MOVE OS ARQUIVOS PARA A PASTA
@@ -84,7 +82,7 @@ if (mysqli_insert_id($conexao)) {
     if (isset($nomeDois)) {
         move_uploaded_file($temporarioDois, $pasta . $nomeDois);
     } else {
-        $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
+        $_SESSION['msg'] = "<div class='alert alert-warning' p-3 role='alert'>
           Formato do arquivo dois incompativel.
         </div>";
         header('location: ../cadastros/cad_produto.php');

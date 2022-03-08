@@ -47,12 +47,12 @@ include "../process/conexao.php";
                             <div class="col-sm-4">
                                 <h6 class="mb-3">To:</h6>
                                 <div>
-                                    <strong>BBBootstrap.com</strong>
+                                    <strong>Endereço de entrega:</strong>
                                 </div>
-                                <div>42, Awesome Enclave</div>
-                                <div>New York City, New york, 10394</div>
-                                <div>Email: admin@bbbootstrap.com</div>
-                                <div>Phone: +48 123 456 789</div>
+                                <div><?php echo $assocUser['numero'].",". $assocUser['rua'] ?></div>
+                                <div><?php echo $assocUser['bairro'].",". $assocUser['cidade'] ?></div>
+                                <div>Email: <?php echo $assocUser['email'] ?></div>
+                                <div>Telefone: <?php echo $assocUser['telefone'] ?></div>
                             </div>
                             <div class="col-sm-4">
                                 <h6 class="mb-3">Details:</h6>

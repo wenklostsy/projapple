@@ -35,10 +35,7 @@ include_once "../template/cep.php";
                                 <a href="#" class="nav-link active">Cadastro de Fornecedores</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link font-regular">Lista de Fornecedores</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link font-regular">Movimentações</a>
+                                <a href="lista-fornecedor.php" class="nav-link font-regular">Lista de Fornecedores</a>
                             </li>
                         </ul>
                     </div>
@@ -47,58 +44,65 @@ include_once "../template/cep.php";
             <!-- CONTEUDO PRINCIPAL -->
             <main class="py-6 bg-surface-secondary">
                 <div class="container-fluid">
+                    <!--EXIBE MENSAGEM AS MENSAGENS-->
+                    <?php
+                    if (isset($_SESSION['msg'])) {
+                        echo $_SESSION['msg'];
+                        unset($_SESSION['msg']);
+                    }
+                    ?>
                     <div class="card shadow border-0 p-4 mb-7">
-                        <form method="get" action="." class="row g-3 needs-validation">
+                        <form method="POST" action="processa-fornecedor.php" class="row g-3 needs-validation">
                             <div class="col-md-4">
                                 <label for="validationCustom02" class="form-label">Nome do Fornecedor</label>
-                                <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+                                <input type="text" name="nome" class="form-control" id="validationCustom02" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom02" class="form-label">CNPJ</label>
-                                <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+                                <input type="text" name="cnpj" class="form-control" id="validationCustom02" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">CEP (SEM HÍFEN)</label>
-                                <input name="cep" type="text" id="cep" value="" size="10" maxlength="8" class="form-control">
+                                <input name="cep" type="text" id="cep" size="10" maxlength="8" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Cidade</label>
-                                <input name="cidade" type="text" id="cidade" class="form-control" disabled required>
+                                <input name="cidade" type="text" id="cidade" class="form-control" readonly required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Estado</label>
-                                <input name="uf" type="text" id="uf" class="form-control" disabled required>
+                                <input name="uf" type="text" id="uf" class="form-control" readonly required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Rua</label>
-                                <input name="rua" type="text" id="rua" class="form-control" disabled required>
+                                <input name="rua" type="text" id="rua" class="form-control" readonly required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Bairro</label>
-                                <input name="bairro" type="text" id="bairro" class="form-control" disabled required>
+                                <input name="bairro" type="text" id="bairro" class="form-control" readonly required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Numero</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name="numero" class="form-control" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Complemento</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name="complemento" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Telefone</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name="telefone" class="form-control" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Email</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name="email" class="form-control" required>
                             </div>
                             <div class="col-md-12">
                                 <label for="validationServer05" class="form-label">Observações (255 Caracteres)</label>
-                                <textarea name="especificacao" rows="5" class="form-control" id="message-text"></textarea>
+                                <textarea name="obs" rows="5" class="form-control" id="message-text"></textarea>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Nova Entrada</button>
+                                <button class="btn btn-primary" type="submit">Cadastrar Fornecedor</button>
                             </div>
                         </form>
                     </div>

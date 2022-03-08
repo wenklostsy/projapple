@@ -71,7 +71,7 @@ include "../template/paginacao.php";
 
                             if ($numRows == 0) {
                                 echo "<div class='alert alert-primary' role='alert'>
-                                    Nenhum produto cadastrado, insera seu prodo clicando no botão <b>Novo Produto</b>.
+                                    Nenhum produto cadastrado, insira seu produto clicando no botão <b>Novo Produto</b>.
                                 </div>";
                             } else {
                             ?>
@@ -238,11 +238,17 @@ include "../template/paginacao.php";
                                 }
                                 ?>
                                 </table>
-                                <div class="card-footer border-0 py-5">
-                                    <?php
-                                    paginacao($anterior, $proximo, $pc, $tp);
-                                    ?>
-                                </div>
+                                <?php
+                                if ($numRows > 0) {
+                                ?>
+                                    <div class="card-footer border-0 py-5">
+                                        <?php
+                                        paginacao($anterior, $proximo, $pc, $tp);
+                                        ?>
+                                    </div>
+                                <?php
+                                }
+                                ?>
                         </div>
                     </div>
                 </div>
@@ -286,10 +292,6 @@ include "../template/paginacao.php";
                                 <div class="col-md-12">
                                     <label for="validationServer05" class="form-label">Especificações Técnicas (550 Caracteres)</label>
                                     <textarea name="especificacao" class="form-control" id="message-text"></textarea>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="validationServer01" class="form-label">Estoque</label>
-                                    <input name="estoque" type="text" class="form-control">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="validationCustomUsername" class="form-label">Valor</label>

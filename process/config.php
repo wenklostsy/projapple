@@ -12,10 +12,20 @@ $ultimoAno = date('Y', strtotime('-1years'));
 #NOME DO USUÁRIO LOGADO
 @$nomeUsuarioLogado = $_SESSION['logado'][0];
 #VARIAVEL DIA ATUAL PARA INPUT DATE
-
 $diaInputAtual = date('d/m/Y');
 #TRANSFORMA A DATA EM UM ARRAY, SEPARANDO-A PELAS BARRAS
 $diaInput = explode("/", $diaInputAtual);
+
+#VERIFICA A DATA DE INICIO E FIM DO MES ATUAL
+$data_incioMes = mktime(0, 0, 0, date('m') , 1 , date('Y'));
+$data_fimMes = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
+$data_incio = date('Y-m-d',$data_incioMes);
+$data_fim = date('Y-m-d',$data_fimMes);
+#VERIFICA A DATA DE INICIO E FIM DO MES ANTERIOR
+$data_incioMesAnterior = mktime(0, 0, 0, date('m')-1 , 1 , date('Y'));
+$data_fimMesAnterior = mktime(23, 59, 59, date('m'), date('d')-date('j'), date('Y'));
+$data_incioMesAnterior = date('Y-m-d',$data_incioMesAnterior);
+$data_fimMesAnterior = date('Y-m-d',$data_fimMesAnterior);
 
 #COMANDO DA TABELA DE USUARIO
 $selecionaUsuarioComando = "SELECT * FROM users";
@@ -25,6 +35,8 @@ require_once "../process/conexao.php";
 $usuariosGeral = mysqli_query($conexao, $selecionaUsuarioComando);
 #EXECUTA A QUERY
 $usuarios = mysqli_query($conexao, $selecionaUsuarioComando);
+#ASSOCIA OS DADOS DO USUÁRIO
+$assocUser = mysqli_fetch_assoc($usuarios);
 #VERIFICA A QUANTIDADE DE LINHAS QUE POSSUI
 $numlinhasUsuarios = mysqli_num_rows($usuariosGeral);
 

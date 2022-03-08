@@ -3,8 +3,6 @@
 include "../template/geral.php";
 #VERIFICA SE O USUÁRIO POSSUI ACESSO
 verificaAcesso();
-#INCLUI OS ARQUIVOS MODAIS
-include "../template/modal.php";
 #CRIA O COMANDO DE PAGINAÇÃO PARA A FUNÇÃO SER REALIZADA COM A TABELA ESPECIFICA
 $comandoPaginacao = "SELECT * FROM users";
 #SELECIONA A QUANTIDADE DE REGISTROS A SEREM EXIBIDOS
@@ -63,9 +61,13 @@ include "../template/paginacao.php";
                                         <div class="col-auto">
                                             <div>
                                                 <button class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
+                                                    <a class="text-white" href="relatorios.php">
+                                                        <i class="fa-solid fa-dollar-sign"></i>
+                                                    </a>
+                                                    <!--
                                                     <p data-bs-toggle='modal' data-bs-target='#Modal_Faturamento'>
-                                                        +
-                                                    </p>
+                                                        <i class="fa-solid fa-dollar-sign"></i>
+                                                    </p>-->
                                                 </button>
                                                 <i class="bi bi-credit-card">
                                                 </i>
@@ -81,6 +83,7 @@ include "../template/paginacao.php";
                                 </div>
                             </div>
                         </div>
+                        <!-- CARD DE PRODUTOS -->
                         <div class="col-xl-3 col-sm-6 col-12">
                             <div class="card shadow border-0">
                                 <div class="card-body">
@@ -108,6 +111,7 @@ include "../template/paginacao.php";
                                 </div>
                             </div>
                         </div>
+                        <!-- CARD DE USUÁRIOS -->
                         <div class="col-xl-3 col-sm-6 col-12">
                             <div class="card shadow border-0">
                                 <div class="card-body">
@@ -131,6 +135,7 @@ include "../template/paginacao.php";
                                 </div>
                             </div>
                         </div>
+                        <!-- CARD TOTAL DE VENDAS -->
                         <div class="col-xl-3 col-sm-6 col-12">
                             <div class="card shadow border-0">
                                 <div class="card-body">
@@ -144,6 +149,34 @@ include "../template/paginacao.php";
                                                 <i class="bi bi-minecart-loaded">
 
                                                 </i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="badge badge-pill bg-soft-success text-success me-2">
+                                            <i class="bi bi-arrow-up me-1"></i>10%
+                                        </span>
+                                        <span class="text-nowrap text-xs text-muted">Desde o último mês</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        $comandoEntradas = "SELECT SUM(valor_gasto) as total FROM entradas WHERE data_entrada between '$data_incio' and '$data_fim'";
+                        $verificaGasto = mysqli_query($conexao, $comandoEntradas);
+                        $verificaGasto = mysqli_fetch_assoc($verificaGasto);
+                        ?>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Gastos</span>
+                                            <span class="h3 font-bold mb-0">R$: <?php echo number_format($verificaGasto['total'] / 100, 2, ",", ".") ?></span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-danger text-white text-lg rounded-circle">
+                                                <i class="fa-solid fa-dollar-sign"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -259,7 +292,10 @@ include "../template/paginacao.php";
             </main>
         </div>
     </div>
-
+    <?php
+    #INCLUI OS ARQUIVOS MODAIS
+    include "../template/modal.php";
+    ?>
 </body>
 
 </html>

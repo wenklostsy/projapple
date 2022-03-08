@@ -49,6 +49,30 @@ if (!isset($_SESSION['logado'])) {
               <label for="exampleInputEmail1" class="form-label">Telefone</label>
               <input name="telefone" type="text" class="form-control" aria-describedby="telefone">
             </div>
+            <div class="">
+              <label for="validationCustom01" class="form-label">CEP (SEM HÍFEN)</label>
+              <input name="cep" type="text" id="cep" size="10" maxlength="8" class="form-control">
+            </div>
+            <div class="">
+              <label for="validationCustom01" class="form-label">Cidade</label>
+              <input name="cidade" type="text" id="cidade" class="form-control" readonly required>
+            </div>
+            <div class="">
+              <label for="validationCustom01" class="form-label">Estado</label>
+              <input name="uf" type="text" id="uf" class="form-control" readonly required>
+            </div>
+            <div class="">
+              <label for="validationCustom01" class="form-label">Rua</label>
+              <input name="rua" type="text" id="rua" class="form-control" readonly required>
+            </div>
+            <div class="">
+              <label for="validationCustom01" class="form-label">Bairro</label>
+              <input name="bairro" type="text" id="bairro" class="form-control" readonly required>
+            </div>
+            <div class="">
+              <label for="validationCustom01" class="form-label">Numero</label>
+              <input type="text" name="numero" class="form-control" required>
+            </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email</label>
               <input name="email" type="email" class="form-control" aria-describedby="email">
