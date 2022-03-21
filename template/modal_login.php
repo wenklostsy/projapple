@@ -38,46 +38,46 @@ if (!isset($_SESSION['logado'])) {
           <h5 class="modal-title" id="exampleModalToggleLabel2">Cadastre-se</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body ">
           <!---FORMULARIO DE CADASTRO-->
-          <form action="../process/cad_user.php" method="post">
-            <div class="mb-3">
+          <form action="../process/cad_user.php" class="row g-3" method="post">
+            <div class="col-md-6">
               <label for="exampleInputEmail1" class="form-label">Nome</label>
               <input name="nome" type="text" class="form-control" aria-describedby="name">
             </div>
-            <div class="mb-3">
+            <div class="col-md-6">
               <label for="exampleInputEmail1" class="form-label">Telefone</label>
               <input name="telefone" type="text" class="form-control" aria-describedby="telefone">
             </div>
-            <div class="">
+            <div class="col-md-6">
               <label for="validationCustom01" class="form-label">CEP (SEM HÍFEN)</label>
               <input name="cep" type="text" id="cep" size="10" maxlength="8" class="form-control">
             </div>
-            <div class="">
+            <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Cidade</label>
               <input name="cidade" type="text" id="cidade" class="form-control" readonly required>
             </div>
-            <div class="">
+            <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Estado</label>
               <input name="uf" type="text" id="uf" class="form-control" readonly required>
             </div>
-            <div class="">
+            <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Rua</label>
               <input name="rua" type="text" id="rua" class="form-control" readonly required>
             </div>
-            <div class="">
+            <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Bairro</label>
               <input name="bairro" type="text" id="bairro" class="form-control" readonly required>
             </div>
-            <div class="">
+            <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Numero</label>
               <input type="text" name="numero" class="form-control" required>
             </div>
-            <div class="mb-3">
+            <div class="col-md-6">
               <label for="exampleInputEmail1" class="form-label">Email</label>
               <input name="email" type="email" class="form-control" aria-describedby="email">
             </div>
-            <div class="mb-3">
+            <div class="col-md-6">
               <label for="exampleInputPassword1" class="form-label">Senha</label>
               <input name="senha" type="password" class="form-control">
             </div>

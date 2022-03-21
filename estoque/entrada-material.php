@@ -110,6 +110,9 @@ include "../template/modal.php";
         </div>
     </div>
 
+    <?php 
+    mysqli_close($conexao);
+    ?>
 </body>
 
 </html>

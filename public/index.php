@@ -1,8 +1,6 @@
 <?php
 include "../template/geral.php";
 include "../process/conexao.php";
-#INCLUI A API DE CEP
-include_once "../template/cep.php";
 ?>
 <title>Produtos</title>
 
@@ -63,7 +61,7 @@ include_once "../template/cep.php";
                                 ?>
                                 <!-- IMAGEM DO PRODUTO-->
                                 <a href="../public/produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
-                                    <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 225px" alt="Imagem do Produto" />
+                                    <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 200px" alt="Imagem do Produto" />
                                 </a>
                                 <!-- DETALHES DO PRODUTO-->
                                 <div class="card-body p-4">
@@ -105,7 +103,10 @@ include_once "../template/cep.php";
         </div>
     </section>
     <!-- Footer-->
-    <?php include "../template/footer.php" ?>
+    <?php 
+    include "../template/footer.php";
+    mysqli_close($conexao);
+    ?>
 </body>
 
 </html>

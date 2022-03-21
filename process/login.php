@@ -43,3 +43,5 @@ header('location: ../public/index.php');
 // #EXECUÇÃO E ASSOCIAÇÃO DE CADASTRO DO USUÁRIO
 // $executaUsuarioCAD = mysqli_query($conexao, $verificaUsuarioCAD);
 // $associadadosUsuarioCAD = mysqli_fetch_assoc($executaUsuarioCAD);
+
+mysqli_close($conexao);

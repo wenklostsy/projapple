@@ -67,8 +67,9 @@ $totalDePaginas = 12;
                             <div class="col card-group mb-5">
                                 <div class="card h-100">
                                     <!-- Product image-->
-                                    <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 225px" alt="Imagem do Produto" />
-                                    <!-- Product details-->
+                                    <a href="../public/produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
+                                        <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 200px" alt="Imagem do Produto" />
+                                    </a><!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">
                                             <!-- Product name-->
@@ -86,7 +87,9 @@ $totalDePaginas = 12;
                                     </div>
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="../public/produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">Ver mais</a></div>
+                                        <div class="text-center">
+                                            <a class="btn btn-outline-dark mt-auto" href="../cadastros/carrinho.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">Adicionar ao carrrinho</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +141,10 @@ $totalDePaginas = 12;
     </main>
 
     <!-- Footer-->
-    <?php include "../template/footer.php" ?>
+    <?php 
+    include "../template/footer.php";
+    mysqli_close($conexao);
+    ?>
 </body>
 
 </html>

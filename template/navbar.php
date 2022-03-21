@@ -15,7 +15,7 @@ include "../template/modal_login.php";
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#!">Ajuda</a>
+                    <a class="nav-link" href="../public/perguntas-post.php">Ajuda</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Produtos</a>
@@ -54,8 +54,8 @@ include "../template/modal_login.php";
             $nomeUsuario
             </button>
             <ul class='dropdown-menu'>
-                <li><a class='dropdown-item' href='#'>Configurações</a></li>
-                <li><a class='dropdown-item' href='#'>Another action</a></li>
+                <li><a class='dropdown-item' href='../usuario/configuracao.php'>Configurações</a></li>
+                <li><a class='dropdown-item' href='../backup/gerabackup.php'>Gerar Backup</a></li>
                 <li><a class='dropdown-item' href='#'>Something else here</a></li>
                 <li><hr class='dropdown-divider'></li>
                 <li><a class='dropdown-item' data-bs-toggle='modal' data-bs-target='#Modal_Sair' href='#'>Sair</a></li>

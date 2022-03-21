@@ -1,26 +1,17 @@
-<div class="p-3">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-            </a>
-            <span class="text-muted">&copy; 2022 DashTech,The future starts now. All rights reserved.</span>
+<!-- Footer-->
+<footer class="footer bg-dark py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto">
+                <div class="small m-0 text-white">Copyright &copy; DashTech,The future starts now. All rights reserved 2022</div>
+            </div>
+            <div class="col-auto">
+                <a class="link-light small" href="#!">Privacidade</a>
+                <span class="text-white mx-1">&middot;</span>
+                <a class="link-light small" href="#!">Termos</a>
+                <span class="text-white mx-1">&middot;</span>
+                <a class="link-light small" href="#!">Contato</a>
+            </div>
         </div>
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3">
-                <a class="text-muted" href="#">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-            </li>
-            <li class="ms-3">
-                <a class="text-muted" href="#">
-                    <i class="fab fa-youtube"></i>
-                </a>
-            </li>
-            <li class="ms-3">
-                <a class="text-muted" href="#">
-                    <i class="fab fa-facebook"></i>
-                </a>
-            </li>
-        </ul>
-    </footer>
-</div>
+    </div>
+</footer>

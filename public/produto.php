@@ -33,13 +33,13 @@ if ($prodAssoc['estoque'] < 1) {
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['principal'] ?>" class="d-block w-100 imgprod" alt="...">
+                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['principal'] ?>" class="d-block w-100 imgprod rounded" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img2'] ?>" class="d-block w-100 imgprod" alt="...">
+                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img2'] ?>" class="d-block w-100 imgprod rounded" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img3'] ?>" class="d-block w-100 imgprod" alt="...">
+                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img3'] ?>" class="d-block w-100 imgprod rounded" alt="...">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -56,18 +56,18 @@ if ($prodAssoc['estoque'] < 1) {
                     <!--<div class="small mb-1">SKU: BST-498</div>-->
                     <h1 class="display-5 fw-bolder"><?php echo $prodAssoc['nome'] ?></h1>
                     <div class="fs-5 mb-5">
-                        <?php 
+                        <?php
                         $valorDesconto = ($prodAssoc['valor_desconto'] / 100);
                         $valorInicial = ($prodAssoc['valor'] / 100);
                         $porcentagem = $valorDesconto / $valorInicial * 100;
-                        $valorInicial1 = number_format(($prodAssoc['valor'] / 100),2,",", ".");
-                        $valorFinal = number_format(($valorInicial - $valorDesconto),2,",", ".");
+                        $valorInicial1 = number_format(($prodAssoc['valor'] / 100), 2, ",", ".");
+                        $valorFinal = number_format(($valorInicial - $valorDesconto), 2, ",", ".");
                         if (!empty($prodAssoc['valor_desconto'])) {
-                        echo 
-                        "<span class='text-decoration-line-through'><del>De R$: $valorInicial1</del></span>
+                            echo
+                            "<span class='text-decoration-line-through'><del>De R$: $valorInicial1</del></span>
                         <h3>Por apenas: R$: $valorFinal </h3>";
                         } else {
-                        echo "<h4 class='p-3'>R$: $valorInicial1 </h4>";
+                            echo "<h4 class='p-3'>R$: $valorInicial1 </h4>";
                         }
                         ?>
                     </div>
@@ -94,110 +94,48 @@ if ($prodAssoc['estoque'] < 1) {
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
             <h2 class="fw-bolder mb-4">Produtos Relacionados</h2>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
-                                <!-- Product price-->
-                                $40.00 - $80.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Special Item</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content">
+                <!--INICIO CARD-->
+                <?php
+                $categoria = $prodAssoc['categoria'];
+                $comandoRelacionados = "SELECT * FROM produtos WHERE categoria = '$categoria' ORDER BY RAND() LIMIT 4";
+                $executaRelacionados = mysqli_query($conexao, $comandoRelacionados);
+                while ($relacionados = mysqli_fetch_assoc($executaRelacionados)) {
+                ?>
+                    <div class="col card-group mb-5">
+                        <div class="card h-100">
+                            <!-- Product image 450X350-->
+                            <a href="../public/produto.php?id=<?php echo $relacionados['idprodutos'] ?>">
+                                <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $relacionados['principal'] ?>" style="width: 450px; height: 210px" alt="FOTO DO PRODUTO" />
+                            </a><!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder"><?php echo $relacionados['nome'] ?></h5>
+                                    <!-- Product price-->
+                                    $40.00 - $80.00
                                 </div>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                $18.00
                             </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Sale Item</h5>
-                                <!-- Product price-->
-                                <span class="text-muted text-decoration-line-through">$50.00</span>
-                                $25.00
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">Popular Item</h5>
-                                <!-- Product reviews-->
-                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
-                                    <div class="bi-star-fill"></div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" href="../public/produto.php?id=<?php echo $relacionados['idprodutos'] ?>">Veja Mais!</a>
                                 </div>
-                                <!-- Product price-->
-                                $40.00
                             </div>
                         </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        </div>
                     </div>
-                </div>
+                <?php
+                }
+                ?>
+                <!--FIM DO CARD-->
             </div>
         </div>
     </section>
     <!-- Footer-->
-    <?php include "../template/footer.php" ?>
+    <?php 
+    include "../template/footer.php";
+    mysqli_close($conexao);
+    ?>
 </body>
 
 </html>

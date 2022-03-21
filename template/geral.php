@@ -17,5 +17,9 @@ session_start();
     <?php
     include_once "../process/config.php";
     include_once "../process/functions.php";
+    if (!isset($_SESSION['logado'])) {
+        #INCLUI A API DE CEP
+        include_once "../template/cep.php";
+    }
     ?> <script src="https://kit.fontawesome.com/013b42215c.js" crossorigin="anonymous"></script>
 </head>

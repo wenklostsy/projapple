@@ -22,7 +22,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link 
+                    <?php if (basename($_SERVER['PHP_SELF']) == "analises.php") {
+                        echo "active";
+                    } ?>" href="../analitycs/analises.php">
                         <i class="fas fa-chart-line"></i> Analitycs
                     </a>
                 </li>
@@ -36,9 +39,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link
+                        <?php if (basename($_SERVER['PHP_SELF']) == "usuarios.php") {
+                        echo "active";
+                    } ?>" href="../adm/usuarios.php">
+                        
                         <i class="fas fa-users"></i> Usuários
                     </a>
+                    
                 </li>
             </ul>
             <!-- Divider -->
@@ -67,12 +75,12 @@
                         <!--EXIBE A QUANTIDADE DE PRODUTOS COM ESTOQUE A BAIXO DO ESPECIFICADO-->
                         <?php
                         include "../process/conexao.php";
-                        $comandoEstoqueMinimo= "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque <=$estoqueMinimo";
+                        $comandoEstoqueMinimo = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque <=$estoqueMinimo";
                         $executaEstoqueMinimo = mysqli_query($conexao, $comandoEstoqueMinimo);
                         $numRows = mysqli_num_rows($executaEstoqueMinimo);
                         if ($numRows == 0) {
                             echo "";
-                        }else {
+                        } else {
                             echo "<span class='badge bg-soft-danger text-primary rounded-pill d-inline-flex align-items-center ms-auto'>$numRows</span>";
                         }
                         ?>

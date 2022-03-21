@@ -325,4 +325,7 @@ include "../template/paginacao.php";
             </div>
         </div>
     </div>
+    <?php 
+    mysqli_close($conexao);
+    ?>
 </body>

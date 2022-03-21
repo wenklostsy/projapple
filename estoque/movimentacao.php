@@ -192,6 +192,7 @@ include "../template/paginacao.php";
                                     </div>
                                 <?php
                                 }
+                                mysqli_close($conexao);
                                 ?>
                         </div>
                     </div>

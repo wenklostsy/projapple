@@ -86,10 +86,10 @@ $relatorio = "<html xml:lang='en' xmlns='http://www.w3.org/1999/xhtml' lang='pt-
             width: 100%;
         }
         th {
-            height: 50px;
+            height: 25px;
         }
         th, td {
-            padding: 15px;
+            padding: 10px;
             text-align: left;
         }
         th {
@@ -111,7 +111,7 @@ $relatorio = "<html xml:lang='en' xmlns='http://www.w3.org/1999/xhtml' lang='pt-
         <div class='page-number'></div>
     </div>
 
-    <h2>$titulo ($ini - $fim)</h2>
+    <h4>$titulo ($ini - $fim)</h4>
     $html
 
     <p>

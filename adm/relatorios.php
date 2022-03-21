@@ -48,7 +48,7 @@ include "../template/paginacao.php";
             <!-- Main -->
             <main class="py-6 bg-surface-secondary">
                 <div class="container-fluid">
-                    <form action="../relatorio/relatorio.php" method="POST" class="row g-3 needs-validation">
+                    <form action="../relatorio/relatorio.php" target="_blank" method="POST" class="row g-3 needs-validation">
                         <div class="col-md-2">
                             <label for="validationCustom04" class="form-label">Tipo de Relatório</label>
                             <select class="form-select" name="relatorio" required>
@@ -66,7 +66,7 @@ include "../template/paginacao.php";
                             <input name="datafim" type="date" class="form-control" required>
                         </div>
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Gerar Relatório</button>
+                            <button class="btn btn-primary" targ type="submit">Gerar Relatório</button>
                         </div>
                     </form>
                 </div>

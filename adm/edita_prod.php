@@ -150,9 +150,8 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                                         <?php
                                         } else {
                                         ?>
-                                            <a href="">
+                                            <a href="../process/proc_apaga_imagem.php?secundaria=<?php echo $id ?>">
                                                 <button class="btn btn-outline-danger mt-auto" type="button" id="button-addon2">Apagar</button>
-
                                             </a>
                                         <?php
                                         }
@@ -189,7 +188,9 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                                     <?php
                                     } else {
                                     ?>
-                                        <button class="btn btn-outline-danger text-center mt-auto" type="button" id="button-addon2">Apagar</button>
+                                        <a href="../process/proc_apaga_imagem.php?terceira=<?php echo $id ?>">
+                                            <button class="btn btn-outline-danger mt-auto" type="button" id="button-addon2">Apagar</button>
+                                        </a>
                                     <?php
                                     }
                                     ?>

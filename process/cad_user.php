@@ -16,17 +16,6 @@ $rua = trim(filter_input(INPUT_POST, 'rua', FILTER_SANITIZE_FULL_SPECIAL_CHARS))
 $bairro = trim(filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 $numero = trim(filter_input(INPUT_POST, 'numero', FILTER_VALIDATE_INT));
 
-echo $nome . "<br>";
-echo $email . "<br>";
-echo $senha . "<br>";
-echo $telefone . "<br>";
-echo $cep . "<br>";
-echo $cidade . "<br>";
-echo $estado . "<br>";
-echo $rua . "<br>";
-echo $bairro . "<br>";
-echo $numero . "<br>";
-
 #VERIFICAÇÃO DE ALGUMA VARIAVEL VAZIA
 if (empty($nome) or empty($email) or empty($senha) or empty($telefone)) {
   $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>

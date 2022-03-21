@@ -110,6 +110,9 @@ include_once "../template/cep.php";
             </main>
         </div>
     </div>
+    <?php 
+    mysqli_close($conexao);
+    ?>
 </body>
 
 </html>
