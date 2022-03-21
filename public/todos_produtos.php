@@ -143,7 +143,6 @@ $totalDePaginas = 12;
     <!-- Footer-->
     <?php 
     include "../template/footer.php";
-    mysqli_close($conexao);
     ?>
 </body>
 

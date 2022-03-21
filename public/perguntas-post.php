@@ -181,7 +181,7 @@ if (empty($id)) {
                                                     <div class="fw-bold">
                                                         <?php echo $comentarios['usuario']." , ". date("d/m/Y H:i", strtotime($comentarios['data_comentario'])) ?> 
                                                     </div>
-                                                    <?php echo $comentarios['comentario'] ?>
+                                                    <?php echo nl2br($comentarios['comentario']) ?>
                                                 </div>
                                             </div>
                                         <?php

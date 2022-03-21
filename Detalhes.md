@@ -16,3 +16,10 @@
 - Aprovação de perguntas
 - Edição de Produto & Imagens
 - Pagina Inicial & Todos os produtos
+
+-----------------------------VERSÃO 0.5.1----------------------------------
+
+21/03/2022 - VERSÃO 0.5.1
+
+- Correção bug de fechamento de conexao na pagina de todos os produtos
+- Adicionado função para comentario com quebra de linha
