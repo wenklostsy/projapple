@@ -49,8 +49,8 @@ include "../process/conexao.php";
                                 <div>
                                     <strong>Endereço de entrega:</strong>
                                 </div>
-                                <div><?php echo $assocUser['numero'].",". $assocUser['rua'] ?></div>
-                                <div><?php echo $assocUser['bairro'].",". $assocUser['cidade'] ?></div>
+                                <div><?php echo $assocUser['numero'] . "," . $assocUser['rua'] ?></div>
+                                <div><?php echo $assocUser['bairro'] . "," . $assocUser['cidade'] ?></div>
                                 <div>Email: <?php echo $assocUser['email'] ?></div>
                                 <div>Telefone: <?php echo $assocUser['telefone'] ?></div>
                             </div>
@@ -111,7 +111,16 @@ include "../process/conexao.php";
                                             if ($addremove == 1) {
                                                 $_SESSION['carrinho'][$cod_produto] += 1;
                                             } else {
+                                                #REMOVE EM 1 A QUANTIDADE DO PRODUTO
                                                 $_SESSION['carrinho'][$cod_produto] -= 1;
+                                                #VERIFICA SE A QUANTIDADE DO PRODUTO É IGUAL A ZERO
+                                                if ($_SESSION['carrinho'][$cod_produto] == 0) {
+                                                    #CASO SEJA IGUAL A ZERO, REMOVE O PRODUTO DA SESSÃO (ARRAY) carrinho E REDIRECIONA PARA A PAGINA DO CARRINHO
+                                                    unset($_SESSION['carrinho'][$cod_produto]);
+                                ?>
+                                                    <meta http-equiv="refresh" content="0; url=../cadastros/carrinho.php?id=<?php echo $link ?>">
+                                <?php
+                                                }
                                             }
                                         }
                                     }
@@ -128,7 +137,7 @@ include "../process/conexao.php";
                                         $valorUnitario = number_format($prodAssoc['valor'] / 100, 2, ",", ".");
                                         #TOTAL DO PRODUTO INDIVIDUAL
                                         if (!empty($prodAssoc['valor_desconto'])) {
-                                            $totalIndividual = (($prodAssoc['valor']-$prodAssoc['valor_desconto']) * $qtd) / 100;
+                                            $totalIndividual = (($prodAssoc['valor'] - $prodAssoc['valor_desconto']) * $qtd) / 100;
                                             #PEGA O VALOR TOTAL DA CONTA
                                             $total += $totalIndividual;
                                             #TOTAL DA CONTA FORMATADO
@@ -162,12 +171,12 @@ include "../process/conexao.php";
                                                 </td>
                                                 <td class="right"><?php echo $qtdTotal ?></td>
                                             </tr>
-                                                <td class="left">
-                                                    <strong>Descontos:</strong>
-                                                </td>
-                                                <td class="right">
-                                                    <strong>R$: <?php echo number_format($totalDescontos/100, 2, ",", ".") ?></strong>
-                                                </td>
+                                            <td class="left">
+                                                <strong>Descontos:</strong>
+                                            </td>
+                                            <td class="right">
+                                                <strong>R$: <?php echo number_format($totalDescontos / 100, 2, ",", ".") ?></strong>
+                                            </td>
                                             </tr>
                                             <tr>
                                                 <td class="left">
