@@ -23,3 +23,7 @@
 
 - Correção bug de fechamento de conexao na pagina de todos os produtos
 - Adicionado função para comentario com quebra de linha
+
+21/08/2022 - VERSÃO 0.5.1
+
+- Correção do Bug de produto negativo na carrinho
