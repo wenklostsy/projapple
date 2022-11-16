@@ -27,3 +27,12 @@
 21/08/2022 - VERSÃO 0.5.1
 
 - Correção do Bug de produto negativo na carrinho
+
+-----------------------------VERSÃO 0.5.2----------------------------------
+
+16/11/2022
+
+- Correção de bugs
+- Correção do carrousel mostrar imagens sem existir
+- Remoção da obrigatoriedade de descritivo e especificações técnicas
+- Ajuste das imagens para layolt
