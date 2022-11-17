@@ -45,8 +45,8 @@ include "../process/conexao.php";
                         $valorDesconto = number_format($valorDesconto / 100, 2, ",", ".");
                         $valorInicial = number_format($valorInicial / 100, 2, ",", ".");
                 ?>
-                        <div class="col card-group mb-5">
-                            <div class="card h-100">
+                        <div class="col card-group mb-3">
+                            <div class="card h-100 w-75">
                                 <!--MEDALHA DE DESCONTO/DESTAQUE-->
                                 <?php
                                 if (!empty($ultimosRegistros['valor_desconto'])) {
@@ -61,7 +61,7 @@ include "../process/conexao.php";
                                 ?>
                                 <!-- IMAGEM DO PRODUTO-->
                                 <a href="../public/produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
-                                    <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 200px" alt="Imagem do Produto" />
+                                    <img class="card-img-top imgprod" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 200px" alt="Imagem do Produto" />
                                 </a>
                                 <!-- DETALHES DO PRODUTO-->
                                 <div class="card-body p-4">

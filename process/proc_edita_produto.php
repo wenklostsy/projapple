@@ -15,7 +15,7 @@ $estoque = trim(filter_input(INPUT_POST, 'estoque', FILTER_SANITIZE_FULL_SPECIAL
 $valor = trim(filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT));
 
 #VERIFICA SE ALGUMA VARIAVEL ESTA VAZIA
-if (empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($descricao) or empty($especificacao) or empty($valor) ) {
+if (empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($valor) ) {
   $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
       Preencha todos os campos!
     </div>";

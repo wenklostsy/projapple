@@ -53,7 +53,7 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                 </div>
             </header>
             <!-- Main -->
-            <main class="py-6 bg-surface-secondary">
+            <main class="py-4 bg-surface-secondary">
                 <div class="container-fluid">
                     <!--EXIBE MENSAGEM AS MENSAGENS-->
                     <?php
@@ -106,12 +106,12 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                         </div>
                     </form>
                     <!--FOTO PRINCIPAL-->
-                    <div class="row g-3">
-                        <div class="col-md-4">
+                    <div class="row g-3 container">
+                        <div class="col-xxl-6 col-xl-5 col-md-6 col-lg-6 col-md-6">
                             <label for="validationCustom01" class="form-label">Foto Principal</label>
                             <div class="card">
                                 <div class="px-2 pt-2 position-relative">
-                                    <img alt="..." src="../arquivos/fotos_produtos/<?php echo $Produto['principal']; ?>" style="width: 650px; height: 350px" class="card-img">
+                                    <img alt="..." src="../arquivos/fotos_produtos/<?php echo $Produto['principal']; ?>" class="card-img imgcard">
                                 </div>
                                 <div class="card-body">
                                     <form action="../process/proc_edita_imagem.php?id=<?php echo $id ?>" method="post" enctype="multipart/form-data">
@@ -124,7 +124,7 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                             </div>
                         </div>
                         <!--SEGUNDA FOTO-->
-                        <div class="col-md-4">
+                        <div class="col-xxl-6 col-xl-5 col-md-6 col-lg-6 col-md-6">
                             <label for="validationCustom01" class="form-label">Foto Secundaria</label>
                             <div class="card">
                                 <div class="px-2 pt-2 position-relative">
@@ -133,7 +133,7 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                                         echo "NENHUMA IMAGEM SELECIONADA";
                                     } else {
                                     ?>
-                                        <img alt="..." src="../arquivos/fotos_produtos/<?php echo $Produto['img2']; ?>" style="width: 650px; height: 350px" class="card-img">
+                                        <img alt="..." src="../arquivos/fotos_produtos/<?php echo $Produto['img2']; ?>" class="card-img imgcard">
                                     <?php
                                     }
                                     ?>
@@ -161,7 +161,7 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                             </div>
                         </div>
                         <!--TERCEIRA FOTO-->
-                        <div class="col-md-4">
+                        <div class="col-xxl-6 col-xl-5 col-md-6 col-lg-6 col-md-6">
                             <label for="validationCustom01" class="form-label">Terceira Foto</label>
                             <div class="card">
                                 <div class="px-2 pt-2 position-relative">
@@ -170,7 +170,7 @@ $numlinhasProdutos = mysqli_num_rows($ProdutoGeral);
                                         echo "NENHUMA IMAGEM SELECIONADA";
                                     } else {
                                     ?>
-                                        <img alt="..." src="../arquivos/fotos_produtos/<?php echo $Produto['img3']; ?>" style="width: 650px; height: 350px" class="card-img">
+                                        <img alt="..." src="../arquivos/fotos_produtos/<?php echo $Produto['img3']; ?>" class="card-img imgcard">
                                     <?php
                                     }
                                     ?>

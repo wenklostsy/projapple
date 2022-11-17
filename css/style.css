@@ -7,15 +7,15 @@
 @import "./variables";
 
 .imgprod {
-    width: 650px;
-    height: 400px;
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
 }
 
 .imgcard {
     width: 450px;
     height: 300px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 /*CSS DO CONTEUDO DO PEDIDO*/

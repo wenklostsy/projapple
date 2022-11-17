@@ -35,12 +35,29 @@ if ($prodAssoc['estoque'] < 1) {
                             <div class="carousel-item active">
                                 <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['principal'] ?>" class="d-block w-100 imgprod rounded" alt="...">
                             </div>
+                            <?php
+                                if ($prodAssoc['img2'] == "") {
+                                    echo "";
+                                }else{
+                            ?>
                             <div class="carousel-item">
                                 <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img2'] ?>" class="d-block w-100 imgprod rounded" alt="...">
                             </div>
+                            <?php
+                                }
+                            ?>
+                            <?php
+                            
+                            if ($prodAssoc['img3'] == "") {
+                                echo "";
+                            }else{
+                                ?>
                             <div class="carousel-item">
                                 <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img3'] ?>" class="d-block w-100 imgprod rounded" alt="...">
                             </div>
+                            <?php
+                                }
+                            ?>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -106,7 +123,7 @@ if ($prodAssoc['estoque'] < 1) {
                         <div class="card h-100">
                             <!-- Product image 450X350-->
                             <a href="../public/produto.php?id=<?php echo $relacionados['idprodutos'] ?>">
-                                <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $relacionados['principal'] ?>" style="width: 450px; height: 210px" alt="FOTO DO PRODUTO" />
+                                <img class="card-img-top imgprod" src="../arquivos/fotos_produtos/<?php echo $relacionados['principal'] ?>" style="width: 450px; height: 210px" alt="FOTO DO PRODUTO" />
                             </a><!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">

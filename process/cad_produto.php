@@ -9,11 +9,11 @@ $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_FULL_SPECIAL_
 $especificacao = filter_input(INPUT_POST, 'especificacao', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $valor = filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT);
 $principal = $_FILES['principal']['name'];
-$formatosAceitos = array("png", "jpeg", "jpg");
+$formatosAceitos = array("png", "JPEG", "jpg");
 $pasta = "../arquivos/fotos_produtos/";
 
 #VERIFICA SE ALGUMA VARIAVEL ESTA VAZIA
-if (empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($descricao) or empty($especificacao) or empty($principal) or empty($valor)) {
+if (empty($nomeProduto) or empty($categoria) or empty($ativo) or empty($principal) or empty($valor)) {
     $_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>
       Preencha todos os campos!
     </div>";

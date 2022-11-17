@@ -10,7 +10,7 @@ $totalDePaginas = 12;
     <?php
     include_once "../template/navbar.php";
     ?>
-    <div class="album py-5 bg-light">
+    <div class="album py-4 bg-light">
         <div class="container">
             <!--TODOS OS PRODUTOS-->
             <section class="py-5 text-center container">
@@ -35,7 +35,7 @@ $totalDePaginas = 12;
             </section>
 
             <main>
-                <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-4 ">
+                <div class="row px-11 px-sm-1 row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 g-4">
                     <!--TIRAR A CLASS CARD E COLOCAR CARD-GROUP PARA RESOLVER O PROBLEMA DA ALTURA-->
                     <?php
                     if (isset($_GET['procura'])) {
@@ -68,7 +68,7 @@ $totalDePaginas = 12;
                                 <div class="card h-100">
                                     <!-- Product image-->
                                     <a href="../public/produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
-                                        <img class="card-img-top" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 200px" alt="Imagem do Produto" />
+                                        <img class="card-img-top imgprod" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 200px" alt="Imagem do Produto" />
                                     </a><!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">
@@ -99,7 +99,6 @@ $totalDePaginas = 12;
                     mysqli_close($conexao);
                     ?>
                 </div>
-
                 <div class="card-footer border-0 py-5">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
