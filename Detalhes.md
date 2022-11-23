@@ -36,3 +36,12 @@
 - Correção do carrousel mostrar imagens sem existir
 - Remoção da obrigatoriedade de descritivo e especificações técnicas
 - Ajuste das imagens para layolt
+
+-----------------------------VERSÃO 0.5.3----------------------------------
+
+22/11/2022
+
+- Correção de layolt
+- Descrição do produto
+- Imagem giratório na aba de produto
+- Correção de bugs

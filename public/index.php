@@ -4,7 +4,7 @@ include "../process/conexao.php";
 ?>
 <title>Produtos</title>
 
-<body>
+<body class="corBranco">
     <?php
     include_once "../template/navbar.php";
     $comandoProdutoAleatorio = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1 ORDER BY RAND() LIMIT 1";
@@ -28,82 +28,79 @@ include "../process/conexao.php";
         ?>
     </div>
     <!-- Section-->
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <!--INICIO DOS CARDS EM DESTAQUE-->
-                <?php
-                $comandoUltimosRegistros = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1 ORDER BY idprodutos DESC LIMIT 4";
-                $executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
-                $numRows = mysqli_num_rows($executaRegistros);
-                if ($numRows > 0) {
-                    while ($ultimosRegistros = mysqli_fetch_assoc($executaRegistros)) {
-                        $valorInicial = $ultimosRegistros['valor'];
-                        $valorDesconto = $ultimosRegistros['valor_desconto'];
-                        $porcentagem = $valorDesconto / $valorInicial * 100;
-                        $ValorFinal = number_format(($valorInicial - $valorDesconto) / 100, 2, ",", ".");
-                        $valorDesconto = number_format($valorDesconto / 100, 2, ",", ".");
-                        $valorInicial = number_format($valorInicial / 100, 2, ",", ".");
-                ?>
-                        <div class="col card-group mb-3">
-                            <div class="card h-100 w-75">
-                                <!--MEDALHA DE DESCONTO/DESTAQUE-->
-                                <?php
-                                if (!empty($ultimosRegistros['valor_desconto'])) {
-                                ?>
-                                    <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem"><?php echo ceil($porcentagem) . "% de Desconto" ?></div>
-                                <?php
-                                } else {
-                                ?>
-                                    <div class="badge bg-primary text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Produto em Destaque</div>
-                                <?php
-                                }
-                                ?>
-                                <!-- IMAGEM DO PRODUTO-->
-                                <a href="../public/produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
-                                    <img class="card-img-top imgprod" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 200px" alt="Imagem do Produto" />
-                                </a>
-                                <!-- DETALHES DO PRODUTO-->
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <!-- NOME DO PRODUTO-->
-                                        <h5 class="fw-bolder"><?php echo $ultimosRegistros['nome'] ?></h5>
-                                        <!-- PREÇO DO PRODUTO/DESCONTO-->
-                                        <span class="text-muted text-decoration-line-through">
-                                            <?php
-                                            #SE O VALOR DE DESCONTO NÃO FOR VAZIO, EXIBE ELE 
-                                            if (!empty($ultimosRegistros['valor_desconto'])) {
-                                                echo "<del>R$: $valorInicial</del><br>
-                                            <h4>R$: $ValorFinal<h4>";
-                                            } else {
-                                                #CASO SEJA VAZIO EXIBE O VALOR ORIGINAL
-                                                echo "<h4 class='p-3'>R$: $valorInicial </h4>";
-                                            }
-                                            ?>
-                                        </span>
+    <div class="container">
+        <section class="py-4">
+            <h2 class="text-center">Produtos em Destaque</h2>
+            <div class=" px-4 px-lg-5 mt-5">
+                <div class="row px-11 px-sm-1 row-cols-1 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 g-4">
+                    <!--INICIO DOS CARDS EM DESTAQUE-->
+                    <?php
+                    $comandoUltimosRegistros = "SELECT * FROM produtos WHERE ativo = 'sim' AND estoque >=1 ORDER BY idprodutos DESC LIMIT 4";
+                    $executaRegistros = mysqli_query($conexao, $comandoUltimosRegistros);
+                    $numRows = mysqli_num_rows($executaRegistros);
+                    if ($numRows > 0) {
+                        while ($ultimosRegistros = mysqli_fetch_assoc($executaRegistros)) {
+                            $valorInicial = $ultimosRegistros['valor'];
+                            $valorDesconto = $ultimosRegistros['valor_desconto'];
+                            $porcentagem = $valorDesconto / $valorInicial * 100;
+                            $ValorFinal = number_format(($valorInicial - $valorDesconto) / 100, 2, ",", ".");
+                            $valorDesconto = number_format($valorDesconto / 100, 2, ",", ".");
+                            $valorInicial = number_format($valorInicial / 100, 2, ",", ".");
+                    ?>
+                            <div class="col card-group">
+                                <div class="card ">
+                                    <!--MEDALHA DE DESCONTO/DESTAQUE-->
+                                    <?php
+                                    if (!empty($ultimosRegistros['valor_desconto'])) {
+                                    ?>
+                                        <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem"><?php echo ceil($porcentagem) . "% de Desconto" ?></div>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <div class="badge bg-primary text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Produto em Destaque</div>
+                                    <?php
+                                    }
+                                    ?>
+                                    <div style="height: 100%">
+                                        <a href="produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
+                                            <img src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" class="card-img-top imgprod h-100" alt="...">
+                                        </a>
                                     </div>
-                                </div>
-                                <!-- VER MAIS DETALHES DO PRODUTO-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center">
-                                        <a class="btn btn-outline-dark mt-auto" href="../public/produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">Ver Mais!</a>
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title "><?php echo $ultimosRegistros['nome'] ?></h5>
+                                        <?php
+                                        if (!empty($ultimosRegistros['valor_desconto'])) {
+                                            echo "<del>R$: $valorInicial</del><br>
+                                            <h4>R$: $ValorFinal<h4>";
+                                        } else {
+                                            echo "<h4 class='p-3'>R$: $valorInicial</h4>";
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center">
+                                            <a class="btn btn-outline-dark mt-auto" href="../cadastros/carrinho.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">Adicionar ao carrinho</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                <?php
+                    <?php
+                        }
                     }
-                }
+                    ?>
+                    <!--FIM DOS CARDS EM DESTAQUE-->
+                </div>
+                <!-- PROPAGANDA-->
+                <?php #INCUIR PROPAGANDA 
                 ?>
-                <!--FIM DOS CARDS EM DESTAQUE-->
             </div>
-            <!-- PROPAGANDA-->
-            <?php #INCUIR PROPAGANDA 
-            ?>
-        </div>
-    </section>
+        </section>
+    </div>
+    
+    <h2 class="text-center">Confira nossos produtos</h2>
     <!-- Footer-->
-    <?php 
+    <?php
+    include "../produto/propaganda.php";
     include "../template/footer.php";
     mysqli_close($conexao);
     ?>

@@ -15,7 +15,6 @@ if ($prodAssoc['estoque'] < 1) {
     header('Location: ../public/index.php');
     exit();
 }
-
 ?>
 <title><?php echo $prodAssoc['nome'] ?></title>
 
@@ -25,7 +24,7 @@ if ($prodAssoc['estoque'] < 1) {
     ?>
     <!-- Seção-->
     <!-- Seção do Produto -->
-    <section class="py-5">
+    <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6">
@@ -33,30 +32,30 @@ if ($prodAssoc['estoque'] < 1) {
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['principal'] ?>" class="d-block w-100 imgprod rounded" alt="...">
+                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['principal'] ?>" class="d-block h-100 imgprod rounded" alt="...">
                             </div>
                             <?php
-                                if ($prodAssoc['img2'] == "") {
-                                    echo "";
-                                }else{
+                            if ($prodAssoc['img2'] == "") {
+                                echo "";
+                            } else {
                             ?>
-                            <div class="carousel-item">
-                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img2'] ?>" class="d-block w-100 imgprod rounded" alt="...">
-                            </div>
+                                <div class="carousel-item">
+                                    <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img2'] ?>" class="d-block h-100 imgprod rounded" alt="...">
+                                </div>
                             <?php
-                                }
+                            }
                             ?>
                             <?php
-                            
+
                             if ($prodAssoc['img3'] == "") {
                                 echo "";
-                            }else{
-                                ?>
-                            <div class="carousel-item">
-                                <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img3'] ?>" class="d-block w-100 imgprod rounded" alt="...">
-                            </div>
+                            } else {
+                            ?>
+                                <div class="carousel-item">
+                                    <img src="../arquivos/fotos_produtos/<?php echo $prodAssoc['img3'] ?>" class="d-block h-100 imgprod rounded" alt="...">
+                                </div>
                             <?php
-                                }
+                            }
                             ?>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -88,12 +87,7 @@ if ($prodAssoc['estoque'] < 1) {
                         }
                         ?>
                     </div>
-                    <h5>Especificações Técnicas:</h5>
-                    <p class="lead">
-                        <?php echo nl2br($prodAssoc['especificacao']) ?>
-                        <hr>
-                    </p>
-                    <h5>Estoque: <?php echo $prodAssoc['estoque'] . " Produtos em estoque"; ?></h5>
+                    <h5>Estoque: <?php echo $prodAssoc['estoque'] . " Produto(s) disponíveis"; ?></h5>
                     <hr>
                     <div class="d-flex">
                         <a href="../cadastros/carrinho.php?id=<?php echo $id ?>">
@@ -107,10 +101,13 @@ if ($prodAssoc['estoque'] < 1) {
             </div>
         </div>
     </section>
+    <?php
+    include "../public/tecnico.php";
+    ?>
     <!-- Related items section-->
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
-            <h2 class="fw-bolder mb-4">Produtos Relacionados</h2>
+            <h2 class="fw-bolder mb-4 text-center">Produtos Relacionados</h2>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content">
                 <!--INICIO CARD-->
                 <?php
@@ -149,7 +146,7 @@ if ($prodAssoc['estoque'] < 1) {
         </div>
     </section>
     <!-- Footer-->
-    <?php 
+    <?php
     include "../template/footer.php";
     mysqli_close($conexao);
     ?>

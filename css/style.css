@@ -18,6 +18,16 @@
     object-fit: contain;
 }
 
+
+.corCinza {
+    background-color: #242422 !important;
+    color: #ddd;
+}
+
+.corBranco {
+    background-color: #F8F6F8;
+}
+
 /*CSS DO CONTEUDO DO PEDIDO*/
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
@@ -163,4 +173,30 @@ p {
     background-color: #ff2b00;
     border-color: #ff2b00;
     border-radius: 1px
+}
+
+body {
+    color: #ee5435;
+}
+
+/*EFEITO DE ANIMAÇÃO IMAGEM DO PRODUTO*/
+.product-image {
+    transition: all 0.5s
+}
+/*EFEITO PARA GIRAR A IMAGEM*/
+.product-image:hover{
+    transform: rotate(10deg);
+    cursor: pointer;
+    
+}
+/*PERSONALIZA O TRILHO*/
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F8F6F8;
+}
+/*PERSONALIZA O SCROLL*/
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: #242422;
+    border-radius: 10px;
 }

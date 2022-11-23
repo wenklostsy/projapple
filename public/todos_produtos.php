@@ -62,30 +62,21 @@ $totalDePaginas = 12;
                             $ValorFinal = number_format(($valorInicial - $valorDesconto) / 100, 2, ",", ".");
                             $valorDesconto = number_format($valorDesconto / 100, 2, ",", ".");
                             $valorInicial = number_format($valorInicial / 100, 2, ",", ".");
-
                     ?>
-                            <div class="col card-group mb-5">
-                                <div class="card h-100">
-                                    <!-- Product image-->
-                                    <a href="../public/produto.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">
-                                        <img class="card-img-top imgprod" src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>" style="width: 450px; height: 200px" alt="Imagem do Produto" />
-                                    </a><!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder"><?php echo $ultimosRegistros['nome'] ?></h5>
-                                            <!-- Product price-->
-                                            <?php
-                                            if (!empty($ultimosRegistros['valor_desconto'])) {
-                                                echo "<del>R$: $valorInicial</del><br>
+                            <div class="col card-group">
+                                <div class="card">
+                                    <img src="../arquivos/fotos_produtos/<?php echo $ultimosRegistros['principal'] ?>"  class="card-img-top imgprod" alt="...">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title "><?php echo $ultimosRegistros['nome'] ?></h5>
+                                        <?php
+                                        if (!empty($ultimosRegistros['valor_desconto'])) {
+                                            echo "<del>R$: $valorInicial</del><br>
                                             <h4>R$: $ValorFinal<h4>";
-                                            } else {
-                                                echo "<h4 class='p-3'>R$: $valorInicial </h4>";
-                                            }
-                                            ?>
-                                        </div>
+                                        } else {
+                                            echo "<h4 class='p-3'>R$: $valorInicial </h4>";
+                                        }
+                                        ?>
                                     </div>
-                                    <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
                                             <a class="btn btn-outline-dark mt-auto" href="../cadastros/carrinho.php?id=<?php echo $ultimosRegistros['idprodutos'] ?>">Adicionar ao carrrinho</a>
@@ -140,7 +131,7 @@ $totalDePaginas = 12;
     </main>
 
     <!-- Footer-->
-    <?php 
+    <?php
     include "../template/footer.php";
     ?>
 </body>

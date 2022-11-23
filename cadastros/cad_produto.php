@@ -75,7 +75,7 @@ include "../template/paginacao.php";
                                 </div>";
                             } else {
                             ?>
-                                <table class="table table-hover table-nowrap">
+                                <table class="table table-striped table-hover table-nowrap table-borderless">
                                     <thead class="thead-light">
                                         <tr>
                                             <th class="d-none d-md-table-cell" scope="col">Id</th>
@@ -90,8 +90,8 @@ include "../template/paginacao.php";
                                     ?>
                                         <tbody>
                                             <tr>
-                                                <th class="d-none d-md-table-cell" scope="row"><?php echo $ultimosRegistros['idprodutos'] ?></th>
-                                                <th scope="row"><?php echo $ultimosRegistros['nome'] ?></th>
+                                                <th class="d-none d-md-table-cell"><?php echo $ultimosRegistros['idprodutos'] ?></th>
+                                                <th><?php echo $ultimosRegistros['nome'] ?></th>
                                                 <td class="d-none d-md-table-cell"><?php echo  number_format($ultimosRegistros['valor'] / 100, 2, ',', '.') ?></td>
                                                 <td class="d-none d-md-table-cell"><?php echo $ultimosRegistros['estoque'] ?></td>
                                                 <td>
